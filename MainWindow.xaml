@@ -95,6 +95,7 @@
                                                 VerticalAlignment="Center" 
                                                 HorizontalAlignment="Center" 
                                                 Foreground="White"/>
+                    
                 </StackPanel>
                 <Border
                 Width="250"

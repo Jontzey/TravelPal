@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TravelPal.Classes;
+using TravelPal.Interface;
+using TravelPal.Managers;
 
 namespace TravelPal
 {
@@ -20,11 +25,26 @@ namespace TravelPal
     /// </summary>
     public partial class MainWindow : Window
     {
-        RegisterWindow RegisterWindow = new RegisterWindow();
+        private UserManager userManager = new();
+
+        private List<IUser> users = new();
+       
+
+
+
 
         public MainWindow()
         {
             InitializeComponent();
+            
+            User user1 = new User();
+            user1.Username = "a";
+            user1.Password = "b";
+
+            userManager.AddUser(user1);
+            
+
+            
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -38,16 +58,15 @@ namespace TravelPal
 
         
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
-        {
-            //TODO
-        }
+      
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
+            UserManager userManager = new UserManager();
+            RegisterWindow registerWindow = new(userManager);
             // when register button is pressed, open register window
             // When that happens Hide Mainwindow
-            RegisterWindow.Show();
+            registerWindow.Show();
             Hide();
 
         }
@@ -58,6 +77,36 @@ namespace TravelPal
             // Before shutting down give a message
             MessageBox.Show("Thanks for traveling with Travel Pals!");
             App.Current.Shutdown();
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO
+            users = userManager.GetAllUsers();
+            string username = txbUsername.Text;
+            string password = pBoxPassword.Password;
+
+            bool isUserExisting = false;
+
+            foreach (IUser user in users)
+            {
+                if(user is User)
+                {
+                    if (user.Username == username && user.Password == password)
+                    {
+                        isUserExisting = true;
+                        TravelsWindow travelsWindow = new();
+                        travelsWindow.Show();
+                    }
+
+                }
+                
+                
+            }
+            if (!isUserExisting)
+            {
+                MessageBox.Show("No user found");
+            }
         }
     }
 }

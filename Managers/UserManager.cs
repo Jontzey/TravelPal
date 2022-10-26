@@ -13,15 +13,29 @@ namespace TravelPal.Managers
         List<IUser> users = new List<IUser>();
         IUser? SignedInUser { get; set; }
 
+
+        //Summary//
+        //Add user with its properties//
+
         public bool AddUser(IUser user)
         {
-            string username = user.Username;
-            string password = user.Password;
-            
-            
+            //string username = user.Username;
+            //string password = user.Password;
+            //var location = user.Location;
+
+            users.Add(user);
             return true;
         }
 
+        // summary //
+        // Gets all users //
+        public List<IUser> GetAllUsers ()
+        {
+            return users;
+        }
+
+        //summary//
+        //Removes a user in the list IUser//
         public void RemoveUser(IUser user)
         {
 
@@ -30,6 +44,11 @@ namespace TravelPal.Managers
         public bool UpdateUsername (IUser user,string Update)
         {
             return true;
+        }
+
+        public bool ValidateUsername ()
+        {
+            return false;
         }
     }
 }

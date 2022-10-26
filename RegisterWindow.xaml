@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPal" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="RegisterWindow" MouseDown="Window_MouseDown" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen" Background="Transparent"  Height="450" Width="800">
+        Title="RegisterWindow"  MouseDown="Window_MouseDown" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen" Background="Transparent"  Height="450" Width="800">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -27,6 +27,7 @@
                         <GradientStop Color="MediumSlateBlue" Offset="0.3"/>
                         <GradientStop Color ="MintCream" Offset="1"/>
                     </LinearGradientBrush>
+                    
                 </Border.Background>
             </Border>
 
@@ -72,6 +73,7 @@
                 Background="White"
                 Opacity="0.5"/>
 
+                
 
                 <!--TextBox with box-->
                 <StackPanel  Orientation="Horizontal" Margin="0,20,0,0">
@@ -132,9 +134,8 @@
                 Background="White"
                 Opacity="0.5"/>
 
-                
 
-                        <!--Checkboxes and combobox-->
+                <!--Checkboxes and combobox-->
                 <StackPanel Orientation="Vertical"  Margin="0,0,0,0">
                     <StackPanel>
                         <Label Content="EU? or not EU?"
@@ -142,8 +143,7 @@
                         <ComboBox x:Name="cbxIsItEu"
                         Width="190" Margin="0,0,0,20" SelectionChanged="cbxIsItEu_SelectionChanged" />
                     </StackPanel>
-
-
+                    
                     <ComboBox
                         IsEnabled="False"
                         x:Name="cbxCountry"
@@ -153,7 +153,7 @@
                         Width="190"  AutomationProperties.Name=""
                         
                        />
-                    <Button x:Name="btnRegister" Margin="0,40,0,0"  Width="100" Height="40" Content="Register" Click="btnRegister_Click"/>
+                    <Button x:Name="btnRegister"  Margin="0,40,0,0"  Width="100" Height="40" Content="Register" Click="btnRegister_Click"/>
                 </StackPanel>
                 
             </StackPanel>

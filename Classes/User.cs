@@ -17,7 +17,10 @@ namespace TravelPal.Classes
         public Countries Location { get; set; }
 
         List<Travel> travels = new ();
-        
 
+        public bool AddUser()
+        {
+            return true;
+        }
     }
 }
