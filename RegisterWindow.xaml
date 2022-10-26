@@ -150,7 +150,7 @@
                         IsEditable="False"
                         Text="           --Choose Country--"
                         
-                        Width="190" Opacity="0.6" AutomationProperties.Name=""
+                        Width="190"  AutomationProperties.Name=""
                         
                        />
                     <Button x:Name="btnRegister" Margin="0,40,0,0"  Width="100" Height="40" Content="Register" Click="btnRegister_Click"/>
