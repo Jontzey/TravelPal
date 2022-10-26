@@ -29,6 +29,7 @@ namespace TravelPal
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // If left mouse button is "Pressed" then Drag and move
             if (e.LeftButton == MouseButtonState.Pressed)
             
                 DragMove();
@@ -39,11 +40,13 @@ namespace TravelPal
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-
+            //TODO
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
+            // when register button is pressed, open register window
+            // When that happens Hide Mainwindow
             RegisterWindow.Show();
             Hide();
 
@@ -51,6 +54,8 @@ namespace TravelPal
 
         private void btnCloseWindow_Click(object sender, RoutedEventArgs e)
         {
+            // A button for closing down the program because of the design choice
+            // Before shutting down give a message
             MessageBox.Show("Thanks for traveling with Travel Pals!");
             App.Current.Shutdown();
         }

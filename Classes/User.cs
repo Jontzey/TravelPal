@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TravelPal.Enums;
 using TravelPal.Interface;
 
@@ -16,7 +17,7 @@ namespace TravelPal.Classes
         public Countries Location { get; set; }
 
         List<Travel> travels = new ();
-
+        
 
     }
 }

@@ -18,9 +18,10 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Border CornerRadius="10" Grid.RowSpan="4" Grid.ColumnSpan="3">
+            <Border CornerRadius="10" Grid.RowSpan="4" Grid.ColumnSpan="4">
                 <Border.Background>
                     <LinearGradientBrush>
                         <GradientStop Color="MediumSlateBlue" Offset="0.3"/>
@@ -29,24 +30,25 @@
                 </Border.Background>
             </Border>
 
-            <!--image and a header-->
-            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+            <!--image and a header     SIMPLE IMAGE FOR COMPANY-->
+            <StackPanel Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center">
                 <Image Source="rescoure/icon.png"
                        Height="70"
                        Width="300"/>
                 <TextBlock
-                    Text="Travel  Pal"
+                    Text="Travel  Pals Register Window"
                     Foreground="White"
                     FontSize="22"
                     FontWeight="Light"
                     FontFamily="Arial"
                     HorizontalAlignment="Center"/>
             </StackPanel>
-            <!--Textbox Username-->
-            <StackPanel Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Margin="0,30,0,0">
+            <!--Textbox Username ASK FOR INPUT-->
+            <StackPanel Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="2" Margin="0,30,0,0">
                 <StackPanel  Orientation="Horizontal">
                     <TextBox
-                        x:Name="txbUsername"
+                        ToolTip="Write a Username to register..."
+                        x:Name="txbRegisterUsername"
                     FontFamily="Arial"
                     FontWeight="Light"
                     Text="Username"
@@ -73,15 +75,16 @@
 
                 <!--TextBox with box-->
                 <StackPanel  Orientation="Horizontal" Margin="0,20,0,0">
-                    <TextBlock
-                        x:Name="txtBoxPassword"
+                    <TextBox
+                        ToolTip="Write a Password to register..."
+                        x:Name="txtBoxRegisterPassword"
                     FontFamily="Arial"
                     FontWeight="Light"
                     Text="Password"
                     FontSize="20"
                     HorizontalAlignment="Center"
                     Background="Transparent"
-                    
+                    BorderThickness="0"
                     Width="235"
                     Opacity="0.5"
                     Height="25"
@@ -90,25 +93,78 @@
                     <iconPacks:PackIconMaterial Kind="FormTextboxPassword" 
                                                 VerticalAlignment="Center" 
                                                 HorizontalAlignment="Center" 
-                                                Foreground="White"/>
+                                                Foreground="White"
+                                                />
+                    
                 </StackPanel>
                 <Border
                 Width="250"
                 Height="2"
                 Background="White"
                 Opacity="0.5"/>
-                <StackPanel Orientation="Vertical"  Margin="0,30,0,0">
-                    
-                    <Button x:Name="btnRegister"   Width="100" Height="40" Content="Register" Click="btnRegister_Click"/>
+                <!--TextBox with box CONFIRM PASSWORD-->
+                <StackPanel  Orientation="Horizontal" Margin="0,20,0,0">
+                    <TextBox
+                        ToolTip="Write your Password second time to register..."
+                        x:Name="txtConfirmPassword"
+                    FontFamily="Arial"
+                    FontWeight="Light"
+                    Text="Confirm Password"
+                    FontSize="20"
+                    HorizontalAlignment="Center"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Width="235"
+                    Opacity="0.5"
+                    Height="25"
+                        Margin="72,0,0,0"
+                    />
+                    <iconPacks:PackIconMaterial Kind="FormTextboxPassword" 
+                                                VerticalAlignment="Center" 
+                                                HorizontalAlignment="Center" 
+                                                Foreground="White"
+                                                />
+
                 </StackPanel>
+                <Border
+                Width="250"
+                Height="2"
+                Background="White"
+                Opacity="0.5"/>
+
+                
+
+                        <!--Checkboxes and combobox-->
+                <StackPanel Orientation="Vertical"  Margin="0,0,0,0">
+                    <StackPanel>
+                        <Label Content="EU? or not EU?"
+                               HorizontalAlignment="Center"/>
+                        <ComboBox x:Name="cbxIsItEu"
+                        Width="190" Margin="0,0,0,20" SelectionChanged="cbxIsItEu_SelectionChanged" />
+                    </StackPanel>
+
+
+                    <ComboBox
+                        IsEnabled="False"
+                        x:Name="cbxCountry"
+                        IsEditable="False"
+                        Text="           --Choose Country--"
+                        
+                        Width="190" Opacity="0.6" AutomationProperties.Name=""
+                        
+                       />
+                    <Button x:Name="btnRegister" Margin="0,40,0,0"  Width="100" Height="40" Content="Register" Click="btnRegister_Click"/>
+                </StackPanel>
+                
             </StackPanel>
             <Button x:Name="btnClose" 
                     Content="Exit"
                     Width="100"
                     Height="40" 
                     Grid.Row="3"
-                    Grid.Column="2"
-                    Margin="60,30,0,0"
+                    Grid.ColumnSpan="2"
+                    Grid.Column="0"
+                    Margin="0,30,250,0"
                     Click="btnClose_Click"/>
         </Grid>
     </Grid>

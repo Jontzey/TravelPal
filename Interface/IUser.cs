@@ -11,7 +11,7 @@ namespace TravelPal.Interface
     {
         public string Username { get; set; }
         public string Password { get; set; }
-
+         
         Countries Location { get; set; }
 
 

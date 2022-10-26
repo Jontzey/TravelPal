@@ -10,6 +10,8 @@ namespace TravelPal.Managers
 {
     public class UserManager
     {
+        List<IUser> users = new List<IUser>();
+        IUser? SignedInUser { get; set; }
 
         public bool AddUser(IUser user)
         {
