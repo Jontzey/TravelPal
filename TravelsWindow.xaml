@@ -7,6 +7,22 @@
         mc:Ignorable="d"
         Title="TravelsWindow" Height="450" Width="800">
     <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border CornerRadius="10" Grid.RowSpan="2">
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="MediumSlateBlue" Offset="0"/>
+                    <GradientStop Color ="MintCream" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        
+        
         <Label Content="TODO"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"

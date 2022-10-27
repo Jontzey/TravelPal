@@ -25,26 +25,21 @@ namespace TravelPal
     /// </summary>
     public partial class MainWindow : Window
     {
+
+
         private UserManager userManager = new();
-
-        private List<IUser> users = new();
-       
-
+        public List<IUser> users = new ();
+        
 
 
 
         public MainWindow()
         {
+
             InitializeComponent();
-            
-            User user1 = new User();
-            user1.Username = "a";
-            user1.Password = "b";
-
-            userManager.AddUser(user1);
-            
 
             
+             
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -62,12 +57,12 @@ namespace TravelPal
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            UserManager userManager = new UserManager();
+            
             RegisterWindow registerWindow = new(userManager);
             // when register button is pressed, open register window
             // When that happens Hide Mainwindow
             registerWindow.Show();
-            Hide();
+            
 
         }
 
@@ -84,7 +79,9 @@ namespace TravelPal
             //summary//
             // users get information from usermanager method //
             //
+           
             users = userManager.GetAllUsers();
+
             string username = txbUsername.Text;
             string password = pBoxPassword.Password;
 
@@ -92,16 +89,17 @@ namespace TravelPal
 
             foreach (IUser user in users)
             {
-                if(user is User)
-                {
+                
                     if (user.Username == username && user.Password == password)
                     {
+                        
                         isUserExisting = true;
-                        TravelsWindow travelsWindow = new();
+                        TravelsWindow travelsWindow = new(userManager);
                         travelsWindow.Show();
+                        Close();
                     }
 
-                }
+                
                 
                 
             }
