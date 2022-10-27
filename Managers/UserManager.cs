@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TravelPal.Classes;
 using TravelPal.Interface;
 
@@ -11,7 +12,7 @@ namespace TravelPal.Managers
     public class UserManager
     {
         List<IUser> users = new List<IUser>();
-        IUser? SignedInUser { get; set; }
+        IUser SignedInUser { get; set; }
 
 
         //Summary//
@@ -19,10 +20,9 @@ namespace TravelPal.Managers
 
         public bool AddUser(IUser user)
         {
-            //string username = user.Username;
-            //string password = user.Password;
-            //var location = user.Location;
-
+            var username = user.Username;
+            string password = user.Password;
+            ValidateUsername();
             users.Add(user);
             return true;
         }
@@ -48,6 +48,18 @@ namespace TravelPal.Managers
 
         public bool ValidateUsername ()
         {
+
+            GetAllUsers();
+            
+            foreach (var user in users)
+            {
+                if(user.Username.Contains(user.Username))
+                {
+                    MessageBox.Show("hmm");
+                }
+            }
+            
+           
             return false;
         }
     }

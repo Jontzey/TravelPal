@@ -81,7 +81,9 @@ namespace TravelPal
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+            //summary//
+            // users get information from usermanager method //
+            //
             users = userManager.GetAllUsers();
             string username = txbUsername.Text;
             string password = pBoxPassword.Password;

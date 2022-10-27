@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelPal.Classes;
 using TravelPal.Enums;
+using TravelPal.Interface;
 using TravelPal.Managers;
 
 namespace TravelPal
@@ -73,21 +74,27 @@ namespace TravelPal
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-           try
+            try
             {
+
+                
                 userManager.GetAllUsers();
                 User user = new();
                 user.Username = txbRegisterUsername.Text;
                 user.Password = txtBoxRegisterPassword.Text;
                 string ConfirmPassword = txtConfirmPassword.Text;
+                userManager.ValidateUsername();
                 if (ConfirmPassword == user.Password)
                 {
                     
+
+                        
                         this.userManager.AddUser(user);
                         Close();
                         MessageBox.Show("You are now registered!");
                         MainWindow mainWindow = new();
                         mainWindow.Show();
+                  
                     
                 }
                 else
