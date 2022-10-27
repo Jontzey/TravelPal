@@ -7,60 +7,103 @@ using System.Windows;
 using TravelPal.Classes;
 using TravelPal.Interface;
 
-namespace TravelPal.Managers
+namespace TravelPal.Managers;
+
+public class UserManager
 {
-    public class UserManager
+    List<IUser> users = new();
+
+    IUser SignedInUser { get; set; } = null;
+
+    public UserManager()
     {
-        List<IUser> users = new List<IUser>();
-        IUser SignedInUser { get; set; }
-
-
-        //Summary//
-        //Add user with its properties//
-
-        public bool AddUser(IUser user)
+        User user = new()
         {
-            var username = user.Username;
-            string password = user.Password;
-            ValidateUsername();
-            users.Add(user);
-            return true;
-        }
+            Username = "baddragon",
+            Password = "nastydragon",
+        };
+        users.Add(user);
+        GetAllUsers();
+        
+    }
 
-        // summary //
-        // Gets all users //
-        public List<IUser> GetAllUsers ()
+   
+    //Summary//
+    //Add user with its properties//
+
+    public bool addUser(IUser user)
+    {
+
+       return false;
+    }
+
+    // summary //
+    // Gets all users //
+    public List<IUser> GetAllUsers ()
+    {
+        
+        return users;
+    }
+
+    //summary//
+    //Removes a user in the list IUser//
+    public void RemoveUser(IUser user)
+    {
+
+    }
+
+    public bool UpdateUsername (IUser user,string Update)
+    {
+        return true;
+    }
+
+    public bool ValidateUsername (string username)
+    {
+
+        foreach (IUser user in users)
         {
-            return users;
-        }
-
-        //summary//
-        //Removes a user in the list IUser//
-        public void RemoveUser(IUser user)
-        {
-
-        }
-
-        public bool UpdateUsername (IUser user,string Update)
-        {
-            return true;
-        }
-
-        public bool ValidateUsername ()
-        {
-
-            GetAllUsers();
-            
-            foreach (var user in users)
+            if (user.Username == username)
             {
-                if(user.Username.Contains(user.Username))
-                {
-                    MessageBox.Show("hmm");
-                }
+                return false;
             }
+        }
+        return true;
+        
+    }
+
+    public bool AddUser(string username, string password, string location)
+    {
+       if(ValidateUsername(username))
+        {
+            User user = new();
+            user.Username = username;
+            user.Password = password;
             
-           
+
+            users.Add((user));
+
+            return true;
+        } 
+        
+            MessageBox.Show("already exists!");
+            return false;
+        
+       
+        
+    }
+
+    public bool IsPasswordTheSame(string confirmPassword, string password)
+    {
+        if (password == confirmPassword)
+        {
+            return true;
+        }
+        else
+        {
+            MessageBox.Show("password does not match");
             return false;
         }
     }
+
+    
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,7 +46,7 @@ namespace TravelPal
                 cbxIsItEu.Items.Add(isEu);
             }
 
-
+            
         }
 
        
@@ -67,40 +68,64 @@ namespace TravelPal
             //Open a new instance of Mainwindow//
             //Close current window//
             //Open MainWindow //
-        MainWindow mainWindow = new MainWindow();
+            
             Close();
-            mainWindow.Show();
+            
         }
 
+                
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             try
             {
 
                 
-                userManager.GetAllUsers();
+                // Create a new user
                 User user = new();
-                user.Username = txbRegisterUsername.Text;
-                user.Password = txtBoxRegisterPassword.Text;
+                // capture the inputs from register window //
+                string username = txbRegisterUsername.Text;
+                string password = txtBoxRegisterPassword.Text;
                 string ConfirmPassword = txtConfirmPassword.Text;
-                userManager.ValidateUsername();
-                if (ConfirmPassword == user.Password)
-                {
-                    
+                //user.Location = (Countries)cbxCountry.Items[0];
 
-                        
-                        this.userManager.AddUser(user);
+
+                //Validate if username exists
+
+
+
+                if (password == ConfirmPassword)
+                {
+                    bool userExistsOrNot = this.userManager.AddUser(username, password,user.Location.ToString());
+
+                    if (userExistsOrNot)
+                    {
+                        MessageBox.Show("Welcome new user!");
                         Close();
-                        MessageBox.Show("You are now registered!");
-                        MainWindow mainWindow = new();
-                        mainWindow.Show();
-                  
-                    
+                    }
+                    else if (userExistsOrNot == false)
+                    {
+
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Passwords does not matches! Try again");
+                    
+                    MessageBox.Show("Passwords does not match");
                 }
+                
+                
+                    
+
+
+
+               
+              
+
+                
+
+
+
+
             }
             catch
             {
