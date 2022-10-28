@@ -32,7 +32,7 @@ namespace TravelPal
             InitializeComponent();
             this.username = username;
             this.password = password;
-           
+            this.users = userManager.GetAllUsers();
             this.userManager = userManager;
             lblUsername.Content = username;
             
@@ -40,12 +40,7 @@ namespace TravelPal
            
         }
 
-        private void UpdateLabelToUserName()
-        {
-            
-            users = userManager.GetAllUsers();
-
-        }
+     
 
         private void btnSignOut_Click(object sender, RoutedEventArgs e)
         {
@@ -55,9 +50,9 @@ namespace TravelPal
             }
             else
             {
-                MainWindow mainWindow = new MainWindow(username,password);
+                MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
-                users = userManager.GetAllUsers();
+                
                  Close();
 
                 //do yes stuff
@@ -68,6 +63,7 @@ namespace TravelPal
         {
             UserDetailsWindow userDetailsWindow = new(userManager,username,password);
             userDetailsWindow.Show();
+            Close();
         }
     }
 }

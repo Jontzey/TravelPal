@@ -23,7 +23,7 @@ namespace TravelPal
     /// </summary>
     public partial class UserDetailsWindow : Window
     {
-        UserManager UserManager = new();
+        UserManager UserManager;
         List<IUser> users = new();
         string username,password;
         public UserDetailsWindow(UserManager userManager,string username,string password)
@@ -40,6 +40,13 @@ namespace TravelPal
            
         }
 
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            // if cancel send back the info that was set from before
+            TravelsWindow travelsWindow = new(UserManager,username,password);
+            travelsWindow.Show();
+        }
+
         private void btnChangeDetails_Click(object sender, RoutedEventArgs e)
         {
             
@@ -47,40 +54,43 @@ namespace TravelPal
             
             string confirmPassword = txbConfirmpassword.Text;
             bool isAllGood = false;
-            
+            // As long it is false next window wont open
             if(isAllGood == false)
             {
+                // username need to be more than 3 characters
                 if (txbUsername.Text.Length < 3)
                 {
                     MessageBox.Show("Username must be longer than 3 characters");
                     
                 }
-                
+                // password need to be more than 5 characters
                 if (txbPassword.Text.Length < 5)
                 {
                     MessageBox.Show("Password have to be more than 5 characters");
 
                 }
+                // if password and other confirm password is not the same
                 if (txbPassword.Text != txbConfirmpassword.Text)
                 {
                     MessageBox.Show("Password does not match");
                 }
-
-                if(txbUsername.Text.Length > 3 && txbPassword.Text.Length > 5 && txbPassword.Text == txbConfirmpassword.Text)
+                // If all conditions are met isAllGood true;
+                if(txbUsername.Text.Length >= 3 && txbPassword.Text.Length >= 5 && txbPassword.Text == txbConfirmpassword.Text)
                 {
                     isAllGood = true;
                 }
             }
+            // if true change username and password from the inputs and send it to new travelswindow
             if (isAllGood == true)
             {
                 
 
+                Close();
                 username = txbUsername.Text;
                 password = txbPassword.Text;
 
                 MessageBox.Show($"Updated: Username: {username}  password: {password}");
 
-                Close();
                 TravelsWindow travelsWindow = new(UserManager,username,password);
                 travelsWindow.Show();
                 

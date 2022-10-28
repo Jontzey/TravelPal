@@ -150,5 +150,16 @@
                 </StackPanel>
             </StackPanel>
         </StackPanel>
+        <Button x:Name="btnCancel"
+                Width="100"
+                Height="40"
+                Grid.Row="5"
+                Grid.Column="3"
+                Grid.RowSpan="2"
+                Grid.ColumnSpan="2"
+                Content="Cancel"
+                Margin="0,0,0,0" 
+                Click="btnCancel_Click"
+                />
     </Grid>
 </Window>

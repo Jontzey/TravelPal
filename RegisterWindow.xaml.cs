@@ -27,7 +27,8 @@ namespace TravelPal
         //Summary//
         //making a field property//
         // connect property with called variable//
-        private UserManager userManager;
+        private UserManager userManager = new();
+        private List<IUser> users;
         public RegisterWindow(UserManager userManager)
         {
             InitializeComponent();
@@ -101,10 +102,10 @@ namespace TravelPal
 
                 if (password == ConfirmPassword)
                 {
-                    
-                    bool userExistsOrNot = this.userManager.AddUser(username, password, user.Location.ToString());
+                    userManager.GetAllUsers();
+                    bool userExistsOrNot = userManager.AddUser(username, password);
 
-                    if (userExistsOrNot)
+                    if (userExistsOrNot == true)
                     {
                         MessageBox.Show("Welcome new user!");
                         Close();

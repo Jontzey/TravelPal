@@ -28,19 +28,19 @@ namespace TravelPal
 
 
         private UserManager userManager = new();
-        public List<IUser> users = new ();
+        public List<IUser> users;
 
-        string username,password;
+       
 
 
 
-        public MainWindow(string username, string password)
+        public MainWindow()
         {
 
             InitializeComponent();
 
-            this.username = username;
-            this.password = password;
+            
+            
 
             
              
@@ -83,9 +83,9 @@ namespace TravelPal
             //summary//
             // users get information from usermanager method //
             //
-           
+            User TheUser = new();
             users = userManager.GetAllUsers();
-
+            
             string username = txbUsername.Text;
             string password = pBoxPassword.Password;
 

@@ -72,7 +72,7 @@ public class UserManager
         
     }
 
-    public bool AddUser(string username, string password, string location)
+    public bool AddUser(string username, string password/*, string location*/)
     {
        if(ValidateUsername(username))
         {
