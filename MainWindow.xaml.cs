@@ -29,14 +29,18 @@ namespace TravelPal
 
         private UserManager userManager = new();
         public List<IUser> users = new ();
-        
+
+        string username,password;
 
 
 
-        public MainWindow()
+        public MainWindow(string username, string password)
         {
 
             InitializeComponent();
+
+            this.username = username;
+            this.password = password;
 
             
              
@@ -94,7 +98,7 @@ namespace TravelPal
                     {
                         
                         isUserExisting = true;
-                        TravelsWindow travelsWindow = new(userManager);
+                        TravelsWindow travelsWindow = new(userManager, username,password);
                         travelsWindow.Show();
                         Close();
                     }

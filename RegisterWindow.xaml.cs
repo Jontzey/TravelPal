@@ -35,7 +35,7 @@ namespace TravelPal
             // connected with field propert//
             this.userManager = userManager;
 
-
+           
 
             //Summary//
             //String array to get the name in enum//
@@ -43,10 +43,14 @@ namespace TravelPal
             //Foreach item in the Enum add to combobox items//
             foreach(var isEu in EuOrNot)
             {
-                cbxIsItEu.Items.Add(isEu);
+             cbxIsItEu.Items.Add(isEu);
+
             }
 
-            
+
+
+
+
         }
 
        
@@ -86,16 +90,19 @@ namespace TravelPal
                 string username = txbRegisterUsername.Text;
                 string password = txtBoxRegisterPassword.Text;
                 string ConfirmPassword = txtConfirmPassword.Text;
-                //user.Location = (Countries)cbxCountry.Items[0];
+
+                //Countries location = (Countries)cbxCountry.SelectedItem;
+
+                //foreach(Countries country in )
 
 
                 //Validate if username exists
 
 
-
                 if (password == ConfirmPassword)
                 {
-                    bool userExistsOrNot = this.userManager.AddUser(username, password,user.Location.ToString());
+                    
+                    bool userExistsOrNot = this.userManager.AddUser(username, password, user.Location.ToString());
 
                     if (userExistsOrNot)
                     {
@@ -109,19 +116,21 @@ namespace TravelPal
                 }
                 else
                 {
-                    
+
                     MessageBox.Show("Passwords does not match");
                 }
-                
-                
-                    
-
-
-
-               
-              
 
                 
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -11,21 +11,77 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <Border CornerRadius="10" Grid.RowSpan="2">
+        <Border CornerRadius="10" Grid.ColumnSpan="4" Grid.RowSpan="6">
             <Border.Background>
                 <LinearGradientBrush>
-                    <GradientStop Color="MediumSlateBlue" Offset="0"/>
-                    <GradientStop Color ="MintCream" Offset="1"/>
+                    <GradientStop Color ="MintCream" Offset="0"/>
+                    <GradientStop Color="MediumSlateBlue" Offset="0.4"/>
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        
-        
-        <Label Content="TODO"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               FontSize="50"/>
+
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.ColumnSpan="2"
+                    Grid.Column="0"
+                    Height="40" 
+                    Margin="0,0,0,45">
+            <Label
+            x:Name="lblShowusername"
+            Content="User :"
+               FontFamily="Arial"
+               FontSize="20"/>
+            <Label
+            FontFamily="Arial"
+            x:Name="lblUsername"
+            Content="Username"
+               
+               FontSize="20"/>
+        </StackPanel>
+        <StackPanel 
+            Orientation="Horizontal" 
+            Grid.Row="6"
+            Grid.ColumnSpan="4">
+            <Button 
+                x:Name="btnUser"
+                Width="100" 
+                Height="40"
+                Content="User" Click="btnUser_Click"/>
+            <Button 
+                    x:Name="btnAddTravel" 
+                    Width="100"
+                    Height="40" 
+                    Content="Add Travel"
+                    Margin="240,0,0,0"/>
+            <Button 
+                    x:Name="btnDetails"
+                    Width="100"
+                    Height="40"
+                    Content="Details"
+                    Margin="240,0,0,0"/>
+        </StackPanel>
+        <Button x:Name="btnSignOut"
+                Grid.Column="4"
+                Width="100"
+                Height="40" 
+                Content="Sign Out"
+                Margin="80,0,0,0" Click="btnSignOut_Click"/>
+        <ListView
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="4"/>
     </Grid>
 </Window>

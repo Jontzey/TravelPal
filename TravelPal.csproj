@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="rescoure\icon.png" />
+    <None Remove="rescoure\PlaneTransparent.png" />
     <None Remove="rescoure\travel.jpg" />
   </ItemGroup>
 
@@ -22,6 +23,7 @@
 
   <ItemGroup>
     <Resource Include="rescoure\icon.png" />
+    <Resource Include="rescoure\PlaneTransparent.png" />
     <Resource Include="rescoure\travel.jpg" />
   </ItemGroup>
 

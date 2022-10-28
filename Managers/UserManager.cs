@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using TravelPal.Classes;
+using TravelPal.Enums;
 using TravelPal.Interface;
 
 namespace TravelPal.Managers;
@@ -17,12 +18,12 @@ public class UserManager
 
     public UserManager()
     {
-        User user = new()
+        UserAdmin Admin = new UserAdmin()
         {
-            Username = "baddragon",
-            Password = "nastydragon",
+            Username = "Admin",
+            Password = "Admin",
         };
-        users.Add(user);
+        users.Add(Admin);
         GetAllUsers();
         
     }
@@ -78,8 +79,9 @@ public class UserManager
             User user = new();
             user.Username = username;
             user.Password = password;
-            
+            //user.Location = location;
 
+            ShowUsername(username);
             users.Add((user));
 
             return true;
@@ -92,6 +94,7 @@ public class UserManager
         
     }
 
+
     public bool IsPasswordTheSame(string confirmPassword, string password)
     {
         if (password == confirmPassword)
@@ -103,6 +106,13 @@ public class UserManager
             MessageBox.Show("password does not match");
             return false;
         }
+    }
+
+
+    public string ShowUsername(string username)
+    {
+
+        return $"{username}";
     }
 
     

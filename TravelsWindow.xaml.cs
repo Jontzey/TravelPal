@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TravelPal.Classes;
+using TravelPal.Interface;
 using TravelPal.Managers;
 
 namespace TravelPal
@@ -21,11 +23,51 @@ namespace TravelPal
     public partial class TravelsWindow : Window
     {
         UserManager userManager;
-        public TravelsWindow(UserManager userManager)
+        List<IUser> users = new();
+        string username;
+        string password;
+        
+        public TravelsWindow(UserManager userManager,string username,string password)
         {
             InitializeComponent();
-
+            this.username = username;
+            this.password = password;
+           
             this.userManager = userManager;
+            lblUsername.Content = username;
+            
+
+           
+        }
+
+        private void UpdateLabelToUserName()
+        {
+            
+            users = userManager.GetAllUsers();
+
+        }
+
+        private void btnSignOut_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you wanna sign out?", "Sign Out", MessageBoxButton.YesNo, MessageBoxImage.Asterisk) == MessageBoxResult.No)
+            {
+                //do no stuff
+            }
+            else
+            {
+                MainWindow mainWindow = new MainWindow(username,password);
+                mainWindow.Show();
+                users = userManager.GetAllUsers();
+                 Close();
+
+                //do yes stuff
+            }
+        }
+
+        private void btnUser_Click(object sender, RoutedEventArgs e)
+        {
+            UserDetailsWindow userDetailsWindow = new(userManager,username,password);
+            userDetailsWindow.Show();
         }
     }
 }
