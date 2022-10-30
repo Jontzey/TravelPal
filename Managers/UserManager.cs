@@ -18,6 +18,7 @@ public class UserManager
 
     public UserManager()
     {
+        // Created a Admin 
         UserAdmin Admin = new UserAdmin()
         {
             Username = "Admin",

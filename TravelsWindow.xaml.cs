@@ -64,7 +64,7 @@ namespace TravelPal
         {
             if (MessageBox.Show("Are you sure you wanna sign out?", "Sign Out", MessageBoxButton.YesNo, MessageBoxImage.Asterisk) == MessageBoxResult.No)
             {
-                //do no stuff
+                //if no //
             }
             else
             {
@@ -73,12 +73,14 @@ namespace TravelPal
                 
                  Close();
 
-                //do yes stuff
+                //if yes //
             }
         }
 
         private void btnUser_Click(object sender, RoutedEventArgs e)
         {
+            //Button for opening user details window //
+
             UserDetailsWindow userDetailsWindow = new(userManager,username,password,location);
             userDetailsWindow.Show();
             Close();
