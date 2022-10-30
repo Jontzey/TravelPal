@@ -41,7 +41,10 @@ namespace TravelPal
         }
 
      
-
+        // signs out the user by closing the window and open mainwindow again //
+        // Note! when a new mainwindow opens data is gone because a new manager is created//
+        // potential fix? = have a log in window instead of a Mainwindow//
+        // mainwindow will be open always but in the backround and will not be showing //
         private void btnSignOut_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Are you sure you wanna sign out?", "Sign Out", MessageBoxButton.YesNo, MessageBoxImage.Asterisk) == MessageBoxResult.No)
@@ -50,7 +53,7 @@ namespace TravelPal
             }
             else
             {
-                MainWindow mainWindow = new MainWindow();
+                MainWindow mainWindow = new MainWindow(userManager);
                 mainWindow.Show();
                 
                  Close();

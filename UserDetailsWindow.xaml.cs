@@ -42,9 +42,11 @@ namespace TravelPal
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            // Close userdetailswindow
             // if cancel send back the info that was set from before
             TravelsWindow travelsWindow = new(UserManager,username,password);
             travelsWindow.Show();
+            Close();
         }
 
         private void btnChangeDetails_Click(object sender, RoutedEventArgs e)

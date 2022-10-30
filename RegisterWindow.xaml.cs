@@ -28,19 +28,20 @@ namespace TravelPal
         //making a field property//
         // connect property with called variable//
         private UserManager userManager = new();
-        private List<IUser> users;
+        private List<IUser> users = new List<IUser>();
+        
         public RegisterWindow(UserManager userManager)
         {
             InitializeComponent();
 
             // connected with field propert//
             this.userManager = userManager;
-
-           
+            this.userManager.GetAllUsers();
+            
 
             //Summary//
             //String array to get the name in enum//
-            var EuOrNot = Enum.GetNames(typeof(EUorNotEU));
+            var EuOrNot = Enum.GetValues(typeof(EUorNotEU));
             //Foreach item in the Enum add to combobox items//
             foreach(var isEu in EuOrNot)
             {
@@ -49,8 +50,13 @@ namespace TravelPal
             }
 
 
+            //TODO //
 
-
+            //foreach (Countries country in Enum.GetValues(typeof(Countries)))
+            //{
+            //    cbxCountry.Items.Add(country);
+            //}
+                
 
         }
 
@@ -62,9 +68,14 @@ namespace TravelPal
             //If Left mousebutton is click//
             //if left is clicked and hold down//
             // Move window//
-            if (e.LeftButton == MouseButtonState.Pressed)
 
-                DragMove();
+
+
+           /////// Do i want this implemented on this window? //////
+
+            //if (e.LeftButton == MouseButtonState.Pressed)
+
+            //    DragMove();
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -91,19 +102,22 @@ namespace TravelPal
                 string username = txbRegisterUsername.Text;
                 string password = txtBoxRegisterPassword.Text;
                 string ConfirmPassword = txtConfirmPassword.Text;
+                Countries Location = (Countries)cbxCountry.SelectedItem;
+                user.Location = Location;
 
-                //Countries location = (Countries)cbxCountry.SelectedItem;
 
-                //foreach(Countries country in )
 
 
                 //Validate if username exists
-
+                if (cbxCountry == null)
+                {
+                    MessageBox.Show("Dont forget to choose a country");
+                }
 
                 if (password == ConfirmPassword)
                 {
                     userManager.GetAllUsers();
-                    bool userExistsOrNot = userManager.AddUser(username, password);
+                    bool userExistsOrNot = userManager.AddUser(username, password, Location);
 
                     if (userExistsOrNot == true)
                     {
@@ -137,9 +151,9 @@ namespace TravelPal
 
 
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Error");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -151,7 +165,7 @@ namespace TravelPal
             if(cbxIsItEu.SelectedIndex == (int)EUorNotEU.EU)
             {
                 cbxCountry.IsEnabled = true;
-                var isEu = Enum.GetNames(typeof(EuropeanCountries));
+                var isEu = Enum.GetValues(typeof(EuropeanCountries));
 
                 foreach (var NotEu in isEu)
                 {
@@ -164,7 +178,7 @@ namespace TravelPal
             else if (cbxIsItEu.SelectedIndex == (int)EUorNotEU.Other)
             {
                 cbxCountry.IsEnabled = true;
-                var isNotEu = Enum.GetNames(typeof(Countries));
+                var isNotEu = Enum.GetValues(typeof(Countries));
 
                 foreach (var NotEu in isNotEu)
                 {

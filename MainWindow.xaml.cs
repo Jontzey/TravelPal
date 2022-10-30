@@ -40,10 +40,11 @@ namespace TravelPal
             InitializeComponent();
 
             
-            
-
-            
-             
+        }
+        public MainWindow (UserManager usermanager)
+        {
+            InitializeComponent();
+            this.userManager = usermanager;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

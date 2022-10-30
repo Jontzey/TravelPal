@@ -53,11 +53,14 @@ public class UserManager
 
     }
 
+    // method not used yet
     public bool UpdateUsername (IUser user,string Update)
     {
         return true;
     }
 
+    //summary//
+    // Checks if the same username exists in Username
     public bool ValidateUsername (string username)
     {
 
@@ -72,14 +75,15 @@ public class UserManager
         
     }
 
-    public bool AddUser(string username, string password/*, string location*/)
+    public bool AddUser(string username, string password, Countries Location)
     {
        if(ValidateUsername(username))
         {
             User user = new();
             user.Username = username;
             user.Password = password;
-            //user.Location = location;
+            user.Location = Location;
+
 
             ShowUsername(username);
             users.Add((user));
@@ -94,7 +98,8 @@ public class UserManager
         
     }
 
-
+    //summar//
+    // a method to confirm password //
     public bool IsPasswordTheSame(string confirmPassword, string password)
     {
         if (password == confirmPassword)
@@ -108,7 +113,8 @@ public class UserManager
         }
     }
 
-
+    // a method to Show Username
+    // note! this method is not used anywhere
     public string ShowUsername(string username)
     {
 

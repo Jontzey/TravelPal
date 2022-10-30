@@ -14,5 +14,15 @@ namespace TravelPal.Classes
 
         public int travellers { get; set; }
 
+        public string Travels()
+        {
+            return $"{Destination} {Country} {travellers}";
+        }
+
+        public virtual string GetInfo()
+        {
+            return "TODO";
+        }
+
     }
 }
