@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TravelPal.Classes;
+using TravelPal.Enums;
 using TravelPal.Interface;
 using TravelPal.Managers;
 
@@ -26,10 +27,10 @@ namespace TravelPal
     public partial class MainWindow : Window
     {
 
-
+        // field variables
         private UserManager userManager = new();
         public List<IUser> users;
-
+        Countries location;
        
 
 
@@ -41,12 +42,19 @@ namespace TravelPal
 
             
         }
+
+        // Made another constructor for when opening a new Mainwindow//
+        // because could not get information from the other windows //
+
         public MainWindow (UserManager usermanager)
         {
             InitializeComponent();
+            
             this.userManager = usermanager;
+            userManager.GetAllUsers();
         }
 
+        // A method to make the window move //
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             // If left mouse button is "Pressed" then Drag and move
@@ -59,7 +67,7 @@ namespace TravelPal
         
 
       
-
+        // Button to open register window //
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             
@@ -70,7 +78,7 @@ namespace TravelPal
             
 
         }
-
+        // button to close down the window and end the program //
         private void btnCloseWindow_Click(object sender, RoutedEventArgs e)
         {
             // A button for closing down the program because of the design choice
@@ -82,24 +90,27 @@ namespace TravelPal
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             //summary//
-            // users get information from usermanager method //
-            //
-            User TheUser = new();
+            // users get information from usermanager method //  
             users = userManager.GetAllUsers();
             
+
+            // the textboxes text saved in a string //
             string username = txbUsername.Text;
             string password = pBoxPassword.Password;
 
             bool isUserExisting = false;
 
+            // For every user in the list //
             foreach (IUser user in users)
             {
-                
+                    //Checks if in the list there is a user with the username //
                     if (user.Username == username && user.Password == password)
                     {
-                        
+                        // if it exists, do this //
                         isUserExisting = true;
-                        TravelsWindow travelsWindow = new(userManager, username,password);
+
+                        //Open new window and send data //
+                        TravelsWindow travelsWindow = new(userManager, username,password,location);
                         travelsWindow.Show();
                         Close();
                     }

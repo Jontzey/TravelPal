@@ -85,7 +85,7 @@ public class UserManager
             user.Location = Location;
 
 
-            ShowUsername(username);
+            
             users.Add((user));
 
             return true;
@@ -113,13 +113,16 @@ public class UserManager
         }
     }
 
-    // a method to Show Username
-    // note! this method is not used anywhere
-    public string ShowUsername(string username)
+    public void UserDetailUpdate(string username, string password, Countries location)
     {
-
-        return $"{username}";
+        foreach (IUser user in users)
+        {
+            user.Username = username;
+            user.Password = password;
+            user.Location = location;
+        }
     }
+  
 
     
 }

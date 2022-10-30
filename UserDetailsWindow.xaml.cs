@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelPal.Classes;
+using TravelPal.Enums;
 using TravelPal.Interface;
 using TravelPal.Managers;
 
@@ -24,15 +25,25 @@ namespace TravelPal
     public partial class UserDetailsWindow : Window
     {
         UserManager UserManager;
-        List<IUser> users = new();
+        //List<IUser> users = new();
         string username,password;
-        public UserDetailsWindow(UserManager userManager,string username,string password)
+        Countries location;
+        public UserDetailsWindow(UserManager userManager,string username,string password, Countries location)
         {
             InitializeComponent();
+
+            //summary//
+            // This. = field variables are the same as the data we got from other windows //
+            // by making field variables we can use them everywhere in this cs.file //
+
             this.UserManager = userManager;
             this.username = username;
             this.password = password;
-
+            this.location = location;
+            
+            //summary //
+            // Display current user //
+            // the username = the textbox text
              txbShowusername.Text = username;
 
             
@@ -44,7 +55,7 @@ namespace TravelPal
         {
             // Close userdetailswindow
             // if cancel send back the info that was set from before
-            TravelsWindow travelsWindow = new(UserManager,username,password);
+            TravelsWindow travelsWindow = new(UserManager,username,password,location);
             travelsWindow.Show();
             Close();
         }
@@ -53,7 +64,8 @@ namespace TravelPal
         {
             
             
-            
+            // making a another string that saves the input from the empty box //
+            // just to confirm if that the password input is the same as earlier input //
             string confirmPassword = txbConfirmpassword.Text;
             bool isAllGood = false;
             // As long it is false next window wont open
@@ -86,15 +98,19 @@ namespace TravelPal
             if (isAllGood == true)
             {
                 
-
-                Close();
+                // Inputs are the same as the textbox
                 username = txbUsername.Text;
                 password = txbPassword.Text;
-
+                // little box to show what user updated
                 MessageBox.Show($"Updated: Username: {username}  password: {password}");
 
-                TravelsWindow travelsWindow = new(UserManager,username,password);
+                // send data to usermanage to update all data
+                UserManager.UserDetailUpdate(username,password,location);
+
+                //Open new window with the new data
+                TravelsWindow travelsWindow = new(UserManager,username,password, location);
                 travelsWindow.Show();
+                Close();
                 
                 
                 

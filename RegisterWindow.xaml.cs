@@ -29,6 +29,7 @@ namespace TravelPal
         // connect property with called variable//
         private UserManager userManager = new();
         private List<IUser> users = new List<IUser>();
+        private Countries Location;
         
         public RegisterWindow(UserManager userManager)
         {
@@ -37,6 +38,7 @@ namespace TravelPal
             // connected with field propert//
             this.userManager = userManager;
             this.userManager.GetAllUsers();
+            
             
 
             //Summary//
@@ -48,15 +50,9 @@ namespace TravelPal
              cbxIsItEu.Items.Add(isEu);
 
             }
+          
 
 
-            //TODO //
-
-            //foreach (Countries country in Enum.GetValues(typeof(Countries)))
-            //{
-            //    cbxCountry.Items.Add(country);
-            //}
-                
 
         }
 
@@ -84,7 +80,8 @@ namespace TravelPal
             //Open a new instance of Mainwindow//
             //Close current window//
             //Open MainWindow //
-            
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
             Close();
             
         }
@@ -95,40 +92,43 @@ namespace TravelPal
             try
             {
 
+
+                btnRegister.IsEnabled = false;
                 
-                // Create a new user
-                User user = new();
+
+                //TODO //
+               // implement if statement if combobox is not choosen //
+
+
                 // capture the inputs from register window //
                 string username = txbRegisterUsername.Text;
                 string password = txtBoxRegisterPassword.Text;
                 string ConfirmPassword = txtConfirmPassword.Text;
                 Countries Location = (Countries)cbxCountry.SelectedItem;
-                user.Location = Location;
+
+              
 
 
-
-
-                //Validate if username exists
-                if (cbxCountry == null)
-                {
-                    MessageBox.Show("Dont forget to choose a country");
-                }
+                // is passwords the same //
 
                 if (password == ConfirmPassword)
                 {
-                    userManager.GetAllUsers();
+                    // Check if user exists //
                     bool userExistsOrNot = userManager.AddUser(username, password, Location);
 
+                    // if true
                     if (userExistsOrNot == true)
                     {
                         MessageBox.Show("Welcome new user!");
                         Close();
                     }
+                    // else false
                     else if (userExistsOrNot == false)
                     {
 
                     }
                 }
+                // if passwords does not match
                 else
                 {
 
