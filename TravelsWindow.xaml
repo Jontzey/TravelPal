@@ -70,7 +70,7 @@
                     Width="100"
                     Height="40"
                     Content="Details"
-                    Margin="240,0,0,0"/>
+                    Margin="240,0,0,0" Click="btnDetails_Click"/>
         </StackPanel>
         <Button x:Name="btnSignOut"
                 Grid.Column="4"

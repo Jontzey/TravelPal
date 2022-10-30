@@ -85,5 +85,12 @@ namespace TravelPal
             userDetailsWindow.Show();
             Close();
         }
+
+        private void btnDetails_Click(object sender, RoutedEventArgs e)
+        {
+            // button for opening TravelDetails Window //
+
+
+        }
     }
 }
