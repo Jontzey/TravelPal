@@ -50,8 +50,8 @@ namespace TravelPal
              cbxIsItEu.Items.Add(isEu);
 
             }
-          
 
+            btnRegister.IsEnabled = false;
 
 
         }
@@ -120,6 +120,8 @@ namespace TravelPal
                     if (userExistsOrNot == true)
                     {
                         MessageBox.Show("Welcome new user!");
+                        MainWindow mainWindow = new MainWindow(userManager);
+                        mainWindow.Show();
                         Close();
                     }
                     // else false
@@ -185,6 +187,11 @@ namespace TravelPal
                     cbxCountry.Items.Add(NotEu);
                 }
             }
+        }
+
+        private void cbxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnRegister.IsEnabled = true;
         }
     }
 }

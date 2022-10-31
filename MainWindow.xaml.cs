@@ -75,6 +75,8 @@ namespace TravelPal
             // when register button is pressed, open register window
             // When that happens Hide Mainwindow
             registerWindow.Show();
+           Close();
+
             
 
         }

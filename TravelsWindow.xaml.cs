@@ -24,7 +24,7 @@ namespace TravelPal
     public partial class TravelsWindow : Window
     {
         UserManager userManager;
-        List<IUser> users = new();
+        List<IUser> users;
         Countries location;
         string username;
         string password;
@@ -89,8 +89,20 @@ namespace TravelPal
         private void btnDetails_Click(object sender, RoutedEventArgs e)
         {
             // button for opening TravelDetails Window //
+            TravelDetailsWindow travelDetailsWindow = new();
+            travelDetailsWindow.Show();
 
+        }
 
+        private void btnAddTravel_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO
+            //implement a new window
+            // a window for user to put in its travel destination
+            // and also a bio for the destination 
+
+            AddTravelWindow addTravelWindow = new();
+            addTravelWindow.Show();
         }
     }
 }

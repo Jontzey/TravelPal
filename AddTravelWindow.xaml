@@ -1,0 +1,82 @@
+﻿<Window x:Class="TravelPal.AddTravelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TravelPal"
+        mc:Ignorable="d"
+        Title="AddTravelWindow" Height="450" Width="800">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--setting background color-->
+        <Border CornerRadius="10" Grid.ColumnSpan="4" Grid.RowSpan="6">
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color ="MintCream" Offset="0"/>
+                    <GradientStop Color="MediumSlateBlue" Offset="0.4"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+         <!--inputs and funtions-->
+        <StackPanel Grid.Column="1"
+                    Grid.Row="1"
+                    Grid.RowSpan="3">
+                <!--information about user destination-->
+            <TextBox Margin="0,0,0,0"
+                     Height="30"/>
+            <!--Choose country-->
+            <ComboBox 
+                x:Name="cbxCountrySelection"
+                Margin="0,18,0,0"/>
+            <!--How many travelers-->
+            <ComboBox
+                x:Name="cbxTravellers"
+                Margin="0,15,0,0"/>
+            
+            <ComboBox
+                Margin="0,15,0,0"/>
+            <ComboBox
+                Margin="0,15,0,0"/>
+        </StackPanel>
+        <!--Label text to show user what is what-->
+        <StackPanel 
+            Grid.Row="1"
+            Grid.RowSpan="3"
+                    >
+            <Label
+                Content="Destination"
+                HorizontalAlignment="Right"
+                FontSize="20"/>
+            <Label
+                Content="Country"
+                HorizontalAlignment="Right"
+                FontSize="20"/>
+            <Label
+                Content="Travelers"
+                HorizontalAlignment="Right"
+                FontSize="20"/>
+            <Label
+                Content="Travel type"
+                HorizontalAlignment="Right"
+                FontSize="20"/>
+            <Label
+                Content="Trip type"
+                HorizontalAlignment="Right"
+                FontSize="20"/>
+        </StackPanel>
+    </Grid>
+</Window>
