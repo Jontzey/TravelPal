@@ -37,7 +37,8 @@
                     Grid.RowSpan="3">
                 <!--information about user destination-->
             <TextBox Margin="0,0,0,0"
-                     Height="30"/>
+                     Height="30"
+                     x:Name="txbDestination"/>
             <!--Choose country-->
             <ComboBox 
                 x:Name="cbxCountrySelection"
@@ -48,10 +49,19 @@
                 Margin="0,15,0,0"/>
             
             <ComboBox
-                Margin="0,15,0,0"/>
+                Margin="0,15,0,0"
+                x:Name="cbxTravelType"/>
             <ComboBox
-                Margin="0,15,0,0"/>
+                Margin="0,15,0,0"
+                x:Name="cbxTripType"/>
         </StackPanel>
+            <CheckBox 
+                Content="All inclusive"
+                x:Name="CbAllInClusive"
+                Grid.Row="2"
+                Grid.Column="2"
+                Margin="20,0,0,4"
+                VerticalAlignment="Bottom"/>
         <!--Label text to show user what is what-->
         <StackPanel 
             Grid.Row="1"
