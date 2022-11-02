@@ -23,52 +23,106 @@ namespace TravelPal
     /// </summary>
     public partial class TravelsWindow : Window
     {
+        // Field variable //
         UserManager userManager;
-        List<IUser> users;
-        Countries location;
-        string username;
-        string password;
+
         
-        public TravelsWindow(UserManager userManager,string username,string password, Countries Location)
+
+        Countries location;
+
+        List<Travel> travels;
+
+        TravelManager travelManager;
+
+        private IUser currentUser;
+
+
+        User theuser;
+
+        
+        
+
+        public TravelsWindow(UserManager userManager, Countries Location,TravelManager travelManager, IUser user)
         {
             InitializeComponent();
 
-            // Field variable same as the data we get from another window //
-            this.username = username;
-            this.password = password;
-            this.location = Location;
-
-            // Get list from usermanager
-            this.users = userManager.GetAllUsers();
-            // usermanager data same as the field variable//
-            this.userManager = userManager;
-            // Label text is the same as the Username //
-            lblUsername.Content = username;
-            
 
            
+
+            
+            // Field variable same as the data we get from another window //
+            this.location = Location;
+            this.travelManager = travelManager;
+            
+            User theuser = userManager.SignedInUser as User;
+            this.userManager = userManager;
+
+
+            
+            
+            
+
+            
+
+
+
+
+            // Label text is the same as the Username //
+            lblUsername.Content = userManager.SignedInUser.Username;
+
+            
+
+            foreach (Travel travel in theuser.travels)
+            {
+             
+
+                ListViewItem selectitem = new ListViewItem();
+                selectitem.Content = travel.GetInfo();
+                selectitem.Tag = travel; 
+                
+                LvAddedTravels.Items.Add(selectitem);
+
+            }
+            
+
+
+            // all inputs from added travel window, add to listview
+
+
+            // if travelmanager is null or not //
+            // NOTE! needed becuase exception will be casted //
+            if (travelManager != null)
+            {
+
+
+              
+            }
+            else
+            {
+                
+
+            }
+
+
+
+
+
         }
 
-                    //NOTE! this comments are now invalid!//
-        // Note! when a new mainwindow opens data is gone because a new manager is created//
-        // potential fix? = have a log in window instead of a Mainwindow//
-        // mainwindow will be open always but in the backround and will not be showing //
-
-
-        ////// Above COMMENTS is now fixed!/////////
-        
+       
 
 
         // signs out the user by closing the window and open mainwindow again //
         private void btnSignOut_Click(object sender, RoutedEventArgs e)
         {
+            // a Messagebox with yes or no option will pop up //
             if (MessageBox.Show("Are you sure you wanna sign out?", "Sign Out", MessageBoxButton.YesNo, MessageBoxImage.Asterisk) == MessageBoxResult.No)
             {
                 //if no //
             }
             else
             {
-                MainWindow mainWindow = new MainWindow(userManager);
+                MainWindow mainWindow = new MainWindow(userManager,travelManager,currentUser);
                 mainWindow.Show();
                 
                  Close();
@@ -81,7 +135,7 @@ namespace TravelPal
         {
             //Button for opening user details window //
 
-            UserDetailsWindow userDetailsWindow = new(userManager,username,password,location);
+            UserDetailsWindow userDetailsWindow = new(userManager,location);
             userDetailsWindow.Show();
             Close();
         }
@@ -89,20 +143,38 @@ namespace TravelPal
         private void btnDetails_Click(object sender, RoutedEventArgs e)
         {
             // button for opening TravelDetails Window //
-            TravelDetailsWindow travelDetailsWindow = new();
+            TravelDetailsWindow travelDetailsWindow = new(userManager,travelManager);
             travelDetailsWindow.Show();
+            Close();
 
         }
 
         private void btnAddTravel_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
-            //implement a new window
-            // a window for user to put in its travel destination
-            // and also a bio for the destination 
+            
 
-            AddTravelWindow addTravelWindow = new();
+            AddTravelWindow addTravelWindow = new(userManager,location,currentUser,travelManager);
             addTravelWindow.Show();
+            Close();
+        }
+
+        private void LvAddedTravels_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+        }
+
+        private void btnRemoveTravel_Click(object sender, RoutedEventArgs e)
+        {
+            if (LvAddedTravels.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Please select a item to Remove", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            ListViewItem selectedItem = LvAddedTravels.SelectedItem as ListViewItem;
+            travelManager.RemoveTravel(selectedItem.Tag as Travel);
+            theuser.travels.Remove(selectedItem.Tag as Travel);
+            LvAddedTravels.Items.RemoveAt(LvAddedTravels.SelectedIndex);
         }
     }
 }

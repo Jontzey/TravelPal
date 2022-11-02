@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPal"
         mc:Ignorable="d"
-        Title="TravelsWindow" Height="450" Width="800">
+        Title="TravelsWindow" Background="Transparent" AllowsTransparency="True"  WindowStartupLocation="CenterScreen" WindowStyle="None" Height="450" Width="800">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -78,6 +78,14 @@
                 Content="User Details"
                 Margin="0,20,0,0"
                 Click="btnUser_Click"/>
+            <Button
+            x:Name="btnRemoveTravel"
+            Width="100"
+            Height="40" 
+            Content="Remove Travel" 
+            Margin="0,20,0,0"
+            Grid.Row="4"
+            Grid.Column="2" Click="btnRemoveTravel_Click"/>
         </StackPanel>
         <Button x:Name="btnSignOut"
                 Grid.Column="4"
@@ -93,10 +101,11 @@
             FontSize="20"/>
         <!--TODO: implement Listview here?-->
         <ListView 
-          
+            x:Name="LvAddedTravels"
+            
             Grid.Row="1"
-            Grid.Column="1"
-            Grid.ColumnSpan="1"
-            Grid.RowSpan="4"/>
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="4" SelectionChanged="LvAddedTravels_SelectionChanged"/>
     </Grid>
 </Window>

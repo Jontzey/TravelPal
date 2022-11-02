@@ -5,6 +5,7 @@ using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 using TravelPal.Enums;
+using TravelPal.Managers;
 
 namespace TravelPal.Classes
 {
@@ -17,16 +18,17 @@ namespace TravelPal.Classes
         public TravelType TravelType { get; set; }
         public TripType TravelTripType { get; set; }
 
-        
+      
 
-        public string Travels()
-        {
-            return $"{Destination} {Country} ";
-        }
 
         public virtual string GetInfo()
         {
-            return "TODO";
+            return "Todo";
+        }
+
+        public virtual string GetCountryInfoName()
+        {
+            return "";
         }
 
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TravelPal.Classes;
 using TravelPal.Enums;
 
 namespace TravelPal.Interface
@@ -14,10 +15,14 @@ namespace TravelPal.Interface
          
         Countries Location { get; set; }
 
+       
+
 
         public bool AddUser()
         {
             return true;
         }
+
+        
     }
 }

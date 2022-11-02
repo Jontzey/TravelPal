@@ -9,17 +9,29 @@ namespace TravelPal.Classes
 {
     public class Trip : Travel
     {
-        TripType type { get; set; }
+        private TripType triptype;
+        
 
-
-
-        public Trip (TripType type)
+        public Trip(TripType type, string destination, int country, int travellers) : base()
         {
-            this.type = type;
-        } 
-       public string GetInfo()
+            triptype = type;
+        }
+
+        
+
+
+
+
+
+       
+        public override string GetInfo()
         {
-            return "TODO";
+            return $"Destination: {Destination} Country: {Country.ToString()} Travellers: {travelers.ToString()}";
+        }
+
+        public override string GetCountryInfoName()
+        {
+            return $"{Country}";
         }
     }
 }

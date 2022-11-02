@@ -13,5 +13,6 @@ namespace TravelPal.Classes
         public string Username { get ; set; }
         public string Password { get; set ; }
         public Countries Location { get; set; }
+        public List<Travel> travels { get ; set; }
     }
 }

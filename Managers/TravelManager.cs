@@ -1,36 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using TravelPal.Classes;
 using TravelPal.Enums;
+using TravelPal.Interface;
 
 namespace TravelPal.Managers
 {
     public class TravelManager
     {
-        List<Travel> travels = new List<Travel>();
+
+        //private UserManager userManager;
 
 
-       public void AddTravel(string Destination, Countries Country, TravelersEnum Travellers, TravelType TravelType, TripType TripType)
-        {
-            Travel travel = new Travel();
-            travel.Destination = Destination;
-            travel.Country = Country;
-            travel.travelers = Travellers;
-            travel.TravelType = TravelType;
-            travel.TravelTripType = TripType;
-        }
-
-        public void RemoveTravel()
-        {
-
-        }
-
-
+        List<Travel> Travel = new();
         
         
+       
+       public void AddTravel(Vacation vacation)
+        {
+
+          Travel.Add(vacation);
+            
+        }
+
+        public void AddTravel(Trip trip)
+        {
+
+            Travel.Add(trip);
+            
+        }
+
+
+
+
+
+        public List<Travel> GetList()
+        {
+
+            return Travel;
+        }
+
+        public void RemoveTravel(Travel travel)
+        {
+            Travel.Remove(travel);
+        }
     }
 }

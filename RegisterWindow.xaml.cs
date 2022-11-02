@@ -25,18 +25,21 @@ namespace TravelPal
     public partial class RegisterWindow : Window
     {
         //Summary//
-        //making a field property//
-        // connect property with called variable//
+        //making a field variable//
+        // connect variables with called variable == this. //
         private UserManager userManager = new();
-        private List<IUser> users = new List<IUser>();
-        private Countries Location;
+        private TravelManager TravelManager;
+        private IUser currentUser;
         
-        public RegisterWindow(UserManager userManager)
+       
+        
+        public RegisterWindow(UserManager userManager, TravelManager travelManager)
         {
             InitializeComponent();
 
-            // connected with field propert//
+            // connected with field variables//
             this.userManager = userManager;
+            this.TravelManager = travelManager;
             this.userManager.GetAllUsers();
             
             
@@ -50,7 +53,7 @@ namespace TravelPal
              cbxIsItEu.Items.Add(isEu);
 
             }
-
+            // button is false as long condition is met //
             btnRegister.IsEnabled = false;
 
 
@@ -67,11 +70,11 @@ namespace TravelPal
 
 
 
-           /////// Do i want this implemented on this window? //////
+            /////// Do i want this implemented on this window? //////
 
-            //if (e.LeftButton == MouseButtonState.Pressed)
+            if (e.LeftButton == MouseButtonState.Pressed)
 
-            //    DragMove();
+                DragMove();
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -80,8 +83,11 @@ namespace TravelPal
             //Open a new instance of Mainwindow//
             //Close current window//
             //Open MainWindow //
+            // we send no data because we close the window instead of saving data //
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
+
+            // this closes register window
             Close();
             
         }
@@ -89,6 +95,8 @@ namespace TravelPal
                 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
+            // Try and catch //
+            // It runs the code in the parameters and if exception is casted we catch that //
             try
             {
 
@@ -96,8 +104,6 @@ namespace TravelPal
                 btnRegister.IsEnabled = false;
                 
 
-                //TODO //
-               // implement if statement if combobox is not choosen //
 
 
                 // capture the inputs from register window //
@@ -114,13 +120,13 @@ namespace TravelPal
                 if (password == ConfirmPassword)
                 {
                     // Check if user exists //
-                    bool userExistsOrNot = userManager.AddUser(username, password, Location);
+                    bool userExistsOrNot = userManager.AddUser(username, password, Location,TravelManager);
 
                     // if true
                     if (userExistsOrNot == true)
                     {
                         MessageBox.Show("Welcome new user!");
-                        MainWindow mainWindow = new MainWindow(userManager);
+                        MainWindow mainWindow = new MainWindow(userManager,TravelManager,currentUser);
                         mainWindow.Show();
                         Close();
                     }
@@ -153,8 +159,10 @@ namespace TravelPal
 
 
             }
+            // when exception is catched //
             catch (Exception ex)
             {
+                // show the error //
                 MessageBox.Show(ex.Message);
             }
         }
@@ -166,9 +174,11 @@ namespace TravelPal
             // show all countries in Eu //
             if(cbxIsItEu.SelectedIndex == (int)EUorNotEU.EU)
             {
+                //When something exists in the combo box, make combo box enabled //
                 cbxCountry.IsEnabled = true;
+                //Saves items from enum class in a variable // 
                 var isEu = Enum.GetValues(typeof(EuropeanCountries));
-
+                // Loop all items in the Enum EU countries //
                 foreach (var NotEu in isEu)
                 {
                     cbxCountry.Items.Add(NotEu);
@@ -179,18 +189,25 @@ namespace TravelPal
             // show all countries //
             else if (cbxIsItEu.SelectedIndex == (int)EUorNotEU.Other)
             {
+                //When something exists in the combo box, make combo box enabled //
                 cbxCountry.IsEnabled = true;
+                //Saves items from enum class in a variable // 
                 var isNotEu = Enum.GetValues(typeof(Countries));
 
+                // Loop all items in the Enum countries //
                 foreach (var NotEu in isNotEu)
                 {
+                    // Add all items to combo box
                     cbxCountry.Items.Add(NotEu);
                 }
             }
         }
 
+        // When something happens to the combobox //
         private void cbxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // When the last combo box is filled with item //
+            // make button register available to press //
             btnRegister.IsEnabled = true;
         }
     }

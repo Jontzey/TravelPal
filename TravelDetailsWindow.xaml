@@ -48,16 +48,11 @@
             FontSize="23"/>
         </StackPanel>
         <ListView
+            x:Name="lvlAllTravels"
             Grid.Row="2"
             Grid.RowSpan="3"
             Grid.ColumnSpan="2"/>
-        <Button
-            x:Name="btnRemoveTravel"
-            Width="100"
-            Height="40" 
-            Content="Remove Travel" 
-            Margin="0,0,0,0"
-            Grid.Row="4"
-            Grid.Column="2" Click="btnRemoveTravel_Click"/>
+        
+        
     </Grid>
 </Window>

@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TravelPal.Classes;
+using TravelPal.Managers;
 
 namespace TravelPal
 {
@@ -19,14 +21,41 @@ namespace TravelPal
     /// </summary>
     public partial class TravelDetailsWindow : Window
     {
-        public TravelDetailsWindow()
+        List<Travel> travels;
+        UserManager userManager;
+        TravelManager TravelManager;
+        
+        public TravelDetailsWindow(UserManager userManager, TravelManager travelmanager)
         {
             InitializeComponent();
+            
+            this.userManager = userManager;
+            this.TravelManager = travelmanager;
+
+            
+            foreach(Travel travel in travels)
+            {
+               
+                if (travel is Vacation)
+                {
+                    
+                    
+                    
+                    lvlAllTravels.Items.Add(travel.GetInfo());
+                }
+                if (travel is Trip)
+                {
+                    
+                    
+                    lvlAllTravels.Items.Add(travel.GetInfo());
+                }
+            }
+
+
         }
 
-        private void btnRemoveTravel_Click(object sender, RoutedEventArgs e)   // BUTTON to remove added travels
-        {
+       
 
-        }
+       
     }
 }

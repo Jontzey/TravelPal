@@ -13,8 +13,9 @@ namespace TravelPal.Managers;
 public class UserManager
 {
     List<IUser> users = new();
-
-    IUser SignedInUser { get; set; } = null;
+    List<Travel> travels;
+    TravelManager TravelManager;
+    public IUser SignedInUser { get; set; }
 
     public UserManager()
     {
@@ -24,6 +25,16 @@ public class UserManager
             Username = "Admin",
             Password = "Admin",
         };
+        User user = new User()
+        {
+            Username = "Gandalf",
+            Password = "Password",
+            Location = Countries.Argentina,
+
+           
+
+        };
+        users.Add(user);
         users.Add(Admin);
         GetAllUsers();
         
@@ -32,7 +43,7 @@ public class UserManager
    
     //Summary//
     //Add user with its properties//
-
+    // this method not used!!! //
     public bool addUser(IUser user)
     {
 
@@ -76,14 +87,21 @@ public class UserManager
         
     }
 
-    public bool AddUser(string username, string password, Countries Location)
+    // Adds a new User //
+    public bool AddUser(string username, string password, Countries Location, TravelManager travelManager)
     {
        if(ValidateUsername(username))
         {
+            this.TravelManager = travelManager;
+
+
+
             User user = new();
             user.Username = username;
             user.Password = password;
             user.Location = Location;
+            
+            
 
 
             
@@ -114,6 +132,8 @@ public class UserManager
         }
     }
 
+
+    // Changes users info //
     public void UserDetailUpdate(string username, string password, Countries location)
     {
         foreach (IUser user in users)
@@ -125,5 +145,30 @@ public class UserManager
     }
   
 
+    // method not in use //
+    public bool SignInUser(string username, string password)
+    {
+        foreach(IUser user in users)
+        {
+             
+            //Checks if in the list there is a user with the username //
+            if (user.Username == username && user.Password == password)
+            {
+                // if it exists, do this //
+                
+                SignedInUser = user;
+                
+                return true;
+            }
+        }
+        return false;
+    }
+
+    
+
+    public List<Travel> AllTravelsFromUser ()
+    {
+        return travels;
+    }
     
 }

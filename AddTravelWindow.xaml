@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPal"
         mc:Ignorable="d"
-        Title="AddTravelWindow" Height="450" Width="800">
+        Title="AddTravelWindow" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None" Height="450" Width="800">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -34,7 +34,7 @@
          <!--inputs and funtions-->
         <StackPanel Grid.Column="1"
                     Grid.Row="1"
-                    Grid.RowSpan="3">
+                    Grid.RowSpan="4">
                 <!--information about user destination-->
             <TextBox Margin="0,0,0,0"
                      Height="30"
@@ -50,18 +50,37 @@
             
             <ComboBox
                 Margin="0,15,0,0"
-                x:Name="cbxTravelType"/>
+                x:Name="cbxTravelType" SelectionChanged="cbxTravelType_SelectionChanged"/>
             <ComboBox
+                Visibility="Hidden"
                 Margin="0,15,0,0"
-                x:Name="cbxTripType"/>
+                x:Name="cbxTripType"
+                />
+            <Button
+                x:Name="btnSaveTravel"
+                Margin="0,20,0,0"
+                Height="40"
+                Width="120"
+                Content="Save Travel" Click="btnSaveTravel_Click"/>
+            
         </StackPanel>
             <CheckBox 
-                Content="All inclusive"
                 x:Name="CbAllInClusive"
+                Visibility="Visible"
+                
+                Content="All inclusive"
                 Grid.Row="2"
                 Grid.Column="2"
                 Margin="20,0,0,4"
-                VerticalAlignment="Bottom"/>
+                VerticalAlignment="Bottom" />
+
+        <Button
+            x:Name="btnExit"
+            Width="120"
+            Height="40"
+            Grid.Row="5"
+            Content="Exit"
+            Click="btnExit_Click"/>
         <!--Label text to show user what is what-->
         <StackPanel 
             Grid.Row="1"
@@ -84,6 +103,8 @@
                 HorizontalAlignment="Right"
                 FontSize="20"/>
             <Label
+                x:Name="lblTripType"
+                Visibility="Hidden"
                 Content="Trip type"
                 HorizontalAlignment="Right"
                 FontSize="20"/>

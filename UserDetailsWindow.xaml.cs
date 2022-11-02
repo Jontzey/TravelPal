@@ -25,10 +25,11 @@ namespace TravelPal
     public partial class UserDetailsWindow : Window
     {
         UserManager UserManager;
-        //List<IUser> users = new();
+        TravelManager TravelManager;
+        IUser currentUser;
         string username,password;
         Countries location;
-        public UserDetailsWindow(UserManager userManager,string username,string password, Countries location)
+        public UserDetailsWindow(UserManager userManager, Countries location)
         {
             InitializeComponent();
 
@@ -37,9 +38,8 @@ namespace TravelPal
             // by making field variables we can use them everywhere in this cs.file //
 
             this.UserManager = userManager;
-            this.username = username;
-            this.password = password;
             this.location = location;
+            this.TravelManager = TravelManager;
             
             //summary //
             // Display current user //
@@ -55,7 +55,7 @@ namespace TravelPal
         {
             // Close userdetailswindow
             // if cancel send back the info that was set from before
-            TravelsWindow travelsWindow = new(UserManager,username,password,location);
+            TravelsWindow travelsWindow = new(UserManager,location,TravelManager,currentUser);
             travelsWindow.Show();
             Close();
         }
@@ -108,7 +108,7 @@ namespace TravelPal
                 UserManager.UserDetailUpdate(username,password,location);
 
                 //Open new window with the new data
-                TravelsWindow travelsWindow = new(UserManager,username,password, location);
+                TravelsWindow travelsWindow = new(UserManager, location, TravelManager,currentUser);
                 travelsWindow.Show();
                 Close();
                 
