@@ -29,11 +29,11 @@ namespace TravelPal
     {
 
         // field variables
-        private UserManager userManager = new();
         TravelManager TravelManager = new();
-        private List<IUser> users;
+        UserManager userManager;
+        private List<IUser> users = new();
         private IUser SignedInUser;
-        Countries location;
+        
 
         
         // MainWindow constructor
@@ -41,23 +41,24 @@ namespace TravelPal
         {
 
             InitializeComponent();
-
-           
+            userManager = new(TravelManager);
             
         }
 
         // Made another constructor for when opening a new Mainwindow//
         // because could not get information from the other windows //
 
-        public MainWindow (UserManager usermanager, TravelManager travelManager,IUser SignedInUser)
+        public MainWindow(UserManager usermanager, TravelManager travelManager, IUser SignedInUser)
         {
             InitializeComponent();
 
             // Saying that the Data we recovered is the same as the field variables we created
             this.TravelManager = travelManager;
+            
             this.userManager = usermanager;
             this.SignedInUser = SignedInUser;
 
+           
 
             // Note! to myself //
             // is this required? //
@@ -131,9 +132,13 @@ namespace TravelPal
                     
 
                     //Open new window and send data //
-                    TravelsWindow travelsWindow = new(userManager, location, TravelManager, SignedInUser);
+                    TravelsWindow travelsWindow = new(userManager, TravelManager, SignedInUser);
                     travelsWindow.Show();
                     Close();
+                }
+                else if (user is UserAdmin)
+                {
+                    
                 }
 
 

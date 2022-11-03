@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,7 +27,7 @@ namespace TravelPal
         // Field variable //
         UserManager userManager;
 
-        
+        List<IUser> users;
 
         Countries location;
 
@@ -36,72 +37,83 @@ namespace TravelPal
 
         private IUser currentUser;
 
-
         User theuser;
 
         
         
 
-        public TravelsWindow(UserManager userManager, Countries Location,TravelManager travelManager, IUser user)
+        public TravelsWindow(UserManager userManager,TravelManager travelManager, IUser TheCurrentUser)
         {
             InitializeComponent();
 
 
+            // Label text is the same as the Username //
+            lblUsername.Content = userManager.SignedInUser.Username;
            
 
             
             // Field variable same as the data we get from another window //
-            this.location = Location;
+            
             this.travelManager = travelManager;
+            this.currentUser = TheCurrentUser;
             
             User theuser = userManager.SignedInUser as User;
+            UserAdmin userAdmin = userManager.SignedInUser as UserAdmin;
             this.userManager = userManager;
 
-
             
             
-            
 
-            
-
-
-
-
-            // Label text is the same as the Username //
-            lblUsername.Content = userManager.SignedInUser.Username;
-
-            
-
-            foreach (Travel travel in theuser.travels)
+            if (theuser is User)
             {
-             
+                    btnAddTravel.Visibility = Visibility.Visible;
+                    btnAddTravel.Visibility = Visibility.Visible;
+                    btnDetails.Visibility = Visibility.Visible;
+                    btnUser.Visibility = Visibility.Visible;
+                foreach (Travel travel in theuser.travels)
+                {
+                    
+                    
+                    ListViewItem selectitem = new ListViewItem();
+                    selectitem.Content = travel.GetCountryInfoName();
+                    selectitem.Tag = travel;
+                    
+                    
+                    
 
-                ListViewItem selectitem = new ListViewItem();
-                selectitem.Content = travel.GetInfo();
-                selectitem.Tag = travel; 
-                
-                LvAddedTravels.Items.Add(selectitem);
+                    LvAddedTravels.Items.Add($"{theuser.Username} {""} {selectitem}");
+                    
+                    
+                    LvAddedTravels.SelectedItem = btnDetails;
+                    
+
+
+                }
 
             }
-            
-
-
-            // all inputs from added travel window, add to listview
-
-
-            // if travelmanager is null or not //
-            // NOTE! needed becuase exception will be casted //
-            if (travelManager != null)
+            if (userAdmin is UserAdmin)
             {
+                        btnAddTravel.Visibility = Visibility.Hidden;
+                        btnDetails.Visibility = Visibility.Hidden;
+                        btnUser.Visibility = Visibility.Hidden;
+                        btnUser.Visibility = Visibility.Hidden;
 
-
-              
-            }
-            else
-            {
+                        travels = travelManager.GetList();
                 
 
+                        foreach (Travel travel in travels)
+                        {
+                            
+                            ListViewItem item = new();
+                            item.Content = travel
+                            item.Tag = travel;
+                            
+                             LvAddedTravels.Items.Add(travel.GetInfo());
+                        }
+               
+                
             }
+
 
 
 
@@ -109,7 +121,10 @@ namespace TravelPal
 
         }
 
-       
+
+
+
+
 
 
         // signs out the user by closing the window and open mainwindow again //
@@ -135,15 +150,26 @@ namespace TravelPal
         {
             //Button for opening user details window //
 
-            UserDetailsWindow userDetailsWindow = new(userManager,location);
+            UserDetailsWindow userDetailsWindow = new(userManager,location,travelManager,currentUser);
             userDetailsWindow.Show();
             Close();
         }
 
         private void btnDetails_Click(object sender, RoutedEventArgs e)
         {
+
+            if (LvAddedTravels.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Nothing is Selected, is there a added travel?", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            ListViewItem selectedItem = LvAddedTravels.SelectedItem as ListViewItem;
+            Travel TravelSelected = selectedItem.Tag as Travel;
+
+
             // button for opening TravelDetails Window //
-            TravelDetailsWindow travelDetailsWindow = new(userManager,travelManager);
+            TravelDetailsWindow travelDetailsWindow = new(userManager,travelManager,theuser,location,TravelSelected);
             travelDetailsWindow.Show();
             Close();
 
@@ -165,16 +191,39 @@ namespace TravelPal
 
         private void btnRemoveTravel_Click(object sender, RoutedEventArgs e)
         {
+            User user = userManager.SignedInUser as User;
+            UserAdmin userAdmin = userManager.SignedInUser as UserAdmin;
+
+           
+
+
+
             if (LvAddedTravels.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Please select a item to Remove", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
+                ListViewItem selectedItem = LvAddedTravels.SelectedItem as ListViewItem;
 
-            ListViewItem selectedItem = LvAddedTravels.SelectedItem as ListViewItem;
-            travelManager.RemoveTravel(selectedItem.Tag as Travel);
-            theuser.travels.Remove(selectedItem.Tag as Travel);
+                
+                Travel TravelSelected = selectedItem.Tag as Travel;
+                 
+
+                user.travels.Remove(selectedItem.Tag as Travel);
+            
+
+                 travelManager.RemoveTravel(selectedItem.Tag as Travel);
+
+
+           
+
             LvAddedTravels.Items.RemoveAt(LvAddedTravels.SelectedIndex);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Welcome to TravelPal!\r This company");
+
         }
     }
 }

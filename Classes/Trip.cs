@@ -12,7 +12,7 @@ namespace TravelPal.Classes
         private TripType triptype;
         
 
-        public Trip(TripType type, string destination, int country, int travellers) : base()
+        public Trip(TripType type, string destination, Countries country, int travellers) : base(destination, country, travellers)
         {
             triptype = type;
         }

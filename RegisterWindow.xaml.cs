@@ -27,8 +27,8 @@ namespace TravelPal
         //Summary//
         //making a field variable//
         // connect variables with called variable == this. //
-        private UserManager userManager = new();
         private TravelManager TravelManager;
+        private UserManager userManager;
         private IUser currentUser;
         
        

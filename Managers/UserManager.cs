@@ -12,31 +12,62 @@ namespace TravelPal.Managers;
 
 public class UserManager
 {
-    List<IUser> users = new();
+    List<IUser> users = new List<IUser>();
     List<Travel> travels;
     TravelManager TravelManager;
     public IUser SignedInUser { get; set; }
 
-    public UserManager()
+    public UserManager(TravelManager travelManager)
     {
+        this.TravelManager = travelManager;
+        //this.travels = travelManager.GetList();
         // Created a Admin 
         UserAdmin Admin = new UserAdmin()
         {
             Username = "Admin",
-            Password = "Admin",
+            Password = "Password",
+            
         };
         User user = new User()
         {
             Username = "Gandalf",
             Password = "Password",
             Location = Countries.Argentina,
-
-           
+            
+        };
+        User user1 = new User()
+        {
+            Username = "Darth Vader",
+            Password = "Password",
+            Location = Countries.Argentina,
 
         };
+
+
+        Vacation vacation = new(true, "justin Bieber Concert", Countries.Afghanistan, 2);
+        Vacation vacation1 = new(true, "Im going to Mecka to pray", Countries.Belgium, 1);
+        Vacation vacation2 = new(true, "Im going to find wife", Countries.Saint_Helena, 5);
+
+        Vacation vacation3 = new(true, "Death Star", Countries.Denmark, 2);
+        Vacation vacation4 = new(true, "To See my Daughter Leia!", Countries.Cape_Verde, 1);
+        Vacation vacation5 = new(true, "Find the Rebels! urgh!!", Countries.Antarctica, 5);
+        user.travels.Add(vacation);
+        user.travels.Add(vacation1);
+        user.travels.Add(vacation2);
+        travelManager.AddTravel(vacation);
+        travelManager.AddTravel(vacation1);
+        travelManager.AddTravel(vacation2);
+        user.travels.Add(vacation3);
+        user.travels.Add(vacation4);
+        user.travels.Add(vacation5);
+        travelManager.AddTravel(vacation3);
+        travelManager.AddTravel(vacation4);
+        travelManager.AddTravel(vacation5);
+
+
         users.Add(user);
         users.Add(Admin);
-        GetAllUsers();
+        
         
     }
 
@@ -44,11 +75,7 @@ public class UserManager
     //Summary//
     //Add user with its properties//
     // this method not used!!! //
-    public bool addUser(IUser user)
-    {
-
-       return false;
-    }
+   
 
     // summary //
     // Gets all users //
@@ -64,6 +91,23 @@ public class UserManager
     {
 
     }
+
+    //public void hmm()
+    //{
+
+    //    foreach (IUser user in users)
+    //    {
+    //        if (user is User)
+    //        {
+    //            users.Add(user as User);
+    //        }
+    //    }
+    //    foreach (User user in users)
+    //    {
+            
+    //    }
+    //}
+
 
     // method not used yet
     public bool UpdateUsername (IUser user,string Update)
@@ -134,14 +178,21 @@ public class UserManager
 
 
     // Changes users info //
-    public void UserDetailUpdate(string username, string password, Countries location)
+    public void UserDetailUpdate(string username, string password, Countries location, IUser currentUser)
     {
-        foreach (IUser user in users)
-        {
-            user.Username = username;
-            user.Password = password;
-            user.Location = location;
-        }
+        //foreach (IUser user in users)
+        //{
+        //}
+            
+            User user = SignedInUser as User;
+
+            SignedInUser.Username = username;
+            SignedInUser.Password = password;
+            SignedInUser.Location = location;
+
+        //    user.Username = username;
+        //    user.Password = password;
+        //    user.Location = location;
     }
   
 

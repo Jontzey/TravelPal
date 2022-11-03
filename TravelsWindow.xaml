@@ -54,7 +54,7 @@
             Orientation="Vertical" 
             Grid.Row="2"
             Grid.Column="1"
-            Grid.RowSpan="3"
+            Grid.RowSpan="4"
             Grid.ColumnSpan="4">
             <!--Opens a window for user to see personal information
             in this case, username,password and country-->
@@ -86,6 +86,7 @@
             Margin="0,20,0,0"
             Grid.Row="4"
             Grid.Column="2" Click="btnRemoveTravel_Click"/>
+           
         </StackPanel>
         <Button x:Name="btnSignOut"
                 Grid.Column="4"
@@ -107,5 +108,13 @@
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Grid.RowSpan="4" SelectionChanged="LvAddedTravels_SelectionChanged"/>
+
+        <Button
+            Content="INFO"
+            Grid.Row="5"
+            Grid.Column="3"
+            Width="70"
+            Height="50"
+            Click="Button_Click"/>
     </Grid>
 </Window>

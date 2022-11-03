@@ -11,6 +11,9 @@ namespace TravelPal.Classes
 {
     public class Travel
     {
+
+        
+
         public string Destination { get; set; }
         public Countries Country { get; set; }
         public TravelersEnum travelers { get; set; }
@@ -18,8 +21,10 @@ namespace TravelPal.Classes
         public TravelType TravelType { get; set; }
         public TripType TravelTripType { get; set; }
 
-      
-
+        public Travel(string Destination, Countries country, int travellers)
+        {
+           Country = country;
+        }
 
         public virtual string GetInfo()
         {

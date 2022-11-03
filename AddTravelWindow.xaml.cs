@@ -86,11 +86,13 @@ namespace TravelPal
 
                 // Save all inputs from user, from the add travel window
                 string Destination = txbDestination.Text;
-                var Country = cbxCountrySelection.SelectedIndex;
+                Countries Country = (Countries)cbxCountrySelection.SelectedItem;
                 var Travellers = cbxTravellers.SelectedIndex;
                 var TravelType = cbxTravelType.SelectedIndex;
                 var TripType = cbxTripType.SelectedIndex;
 
+                
+                
                 
 
 
@@ -109,7 +111,7 @@ namespace TravelPal
                     User theuser = UserManager.SignedInUser as User;
                     
                     theuser.travels.Add(trip);
-                    UserManager.AllTravelsFromUser().Add(trip);
+                    
 
                 }
                 if (cbxTravelType.SelectedIndex == 1)
@@ -128,7 +130,7 @@ namespace TravelPal
 
                 }
 
-                TravelsWindow travelsWindow = new(UserManager,location, TravelManager,currentUser);
+                TravelsWindow travelsWindow = new(UserManager, TravelManager,currentUser);
                 travelsWindow.Show();
                 Close();
             }
@@ -163,7 +165,7 @@ namespace TravelPal
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            TravelsWindow travelsWindow = new(UserManager, location, TravelManager,currentUser);
+            TravelsWindow travelsWindow = new(UserManager, TravelManager,currentUser);
             travelsWindow.Show();
             Close();
         }

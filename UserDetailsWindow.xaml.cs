@@ -29,7 +29,7 @@ namespace TravelPal
         IUser currentUser;
         string username,password;
         Countries location;
-        public UserDetailsWindow(UserManager userManager, Countries location)
+        public UserDetailsWindow(UserManager userManager, Countries location,TravelManager travelManager ,IUser theUser)
         {
             InitializeComponent();
 
@@ -39,12 +39,14 @@ namespace TravelPal
 
             this.UserManager = userManager;
             this.location = location;
-            this.TravelManager = TravelManager;
-            
+            this.TravelManager = travelManager;
+            this.currentUser = theUser;
             //summary //
             // Display current user //
             // the username = the textbox text
-             txbShowusername.Text = username;
+
+            User theuser = userManager.SignedInUser as User;
+            txbShowusername.Text = userManager.SignedInUser.Username;
 
             
             
@@ -55,7 +57,7 @@ namespace TravelPal
         {
             // Close userdetailswindow
             // if cancel send back the info that was set from before
-            TravelsWindow travelsWindow = new(UserManager,location,TravelManager,currentUser);
+            TravelsWindow travelsWindow = new(UserManager,TravelManager,currentUser);
             travelsWindow.Show();
             Close();
         }
@@ -99,16 +101,16 @@ namespace TravelPal
             {
                 
                 // Inputs are the same as the textbox
-                username = txbUsername.Text;
-                password = txbPassword.Text;
+                string username = txbUsername.Text;
+                string password = txbPassword.Text;
                 // little box to show what user updated
                 MessageBox.Show($"Updated: Username: {username}  password: {password}");
 
                 // send data to usermanage to update all data
-                UserManager.UserDetailUpdate(username,password,location);
+                UserManager.UserDetailUpdate(username,password,location,currentUser);
 
                 //Open new window with the new data
-                TravelsWindow travelsWindow = new(UserManager, location, TravelManager,currentUser);
+                TravelsWindow travelsWindow = new(UserManager, TravelManager,currentUser);
                 travelsWindow.Show();
                 Close();
                 

@@ -12,12 +12,17 @@ namespace TravelPal.Classes
       
 
         public bool allInClusive { get; set; }
-      
 
-        public Vacation(bool allinclusive, string destination, int country, int travellers) : base()
+        
+
+        public Vacation(bool allinclusive, string destination, Countries country, int travellers) : base(destination, country, travellers)
         {
             
             allinclusive = allInClusive;
+            this.Destination = destination;
+            this.Country = country;
+            
+            
 
           
         }
@@ -30,7 +35,7 @@ namespace TravelPal.Classes
 
         public override string GetCountryInfoName()
         {
-            return $"{Country}";
+            return $"{Country.ToString()}";
         }
     }
 }

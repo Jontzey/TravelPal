@@ -6,6 +6,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using TravelPal.Classes;
 using TravelPal.Enums;
 using TravelPal.Interface;
@@ -18,37 +19,39 @@ namespace TravelPal.Managers
         //private UserManager userManager;
 
 
-        List<Travel> Travel = new();
-        
+        List<Travel> Travels = new();
+
         
        
        public void AddTravel(Vacation vacation)
         {
 
-          Travel.Add(vacation);
+          Travels.Add(vacation);
             
         }
 
         public void AddTravel(Trip trip)
         {
 
-            Travel.Add(trip);
+            Travels.Add(trip);
             
         }
-
-
-
 
 
         public List<Travel> GetList()
         {
 
-            return Travel;
+            return Travels;
         }
 
         public void RemoveTravel(Travel travel)
         {
-            Travel.Remove(travel);
+            Travels.Remove(travel);
+            
         }
+
+      
+
+       
     }
 }
