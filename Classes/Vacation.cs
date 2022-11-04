@@ -30,7 +30,7 @@ namespace TravelPal.Classes
 
         public override string GetInfo()
         {
-            return $"Destination: {Destination} Country: {Country.ToString()} Travellers: {travelers.ToString()} Allinclusive: {allInClusive.ToString()}";
+            return $"Destination: {Destination}\rCountry: {Country.ToString()} \rTravellers: {travelers.ToString()}\rAllinclusive: {allInClusive.ToString()}";
         }
 
         public override string GetCountryInfoName()

@@ -12,6 +12,9 @@ namespace TravelPal.Classes
         private TripType triptype;
         
 
+
+
+        // constructor
         public Trip(TripType type, string destination, Countries country, int travellers) : base(destination, country, travellers)
         {
             triptype = type;
@@ -22,16 +25,18 @@ namespace TravelPal.Classes
 
 
 
-
+        // Trip Methods
        
         public override string GetInfo()
         {
-            return $"Destination: {Destination} Country: {Country.ToString()} Travellers: {travelers.ToString()}";
+            return $"Destination: {Destination}\rCountry: {Country.ToString()}\rTravellers: {travelers.ToString()}\rtripType: {triptype.ToString()} ";
         }
 
         public override string GetCountryInfoName()
         {
             return $"{Country}";
         }
+
+        
     }
 }

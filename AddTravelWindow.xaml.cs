@@ -43,9 +43,10 @@ namespace TravelPal
             var country = Enum.GetValues(typeof(Countries));
 
 
+            CbAllInClusive.Visibility = Visibility.Hidden;
 
             // Put all enum in the comboboxes
-            foreach(var countries in country)
+            foreach (var countries in country)
             {
                 cbxCountrySelection.Items.Add(countries);
             }
@@ -95,12 +96,12 @@ namespace TravelPal
                 
                 
 
-
+                    // if combox is Trip
                 if (cbxTravelType.SelectedIndex == 0)
                 {
 
 
-
+                    // sele
                     TripType triptype = (TripType)cbxTripType.SelectedItem;
 
 
@@ -114,10 +115,11 @@ namespace TravelPal
                     
 
                 }
+                    // if combox is Vacation
                 if (cbxTravelType.SelectedIndex == 1)
                 {
 
-
+                    CbAllInClusive.Visibility = Visibility.Visible;
 
                     bool allinclusive = (bool)CbAllInClusive.IsChecked;
                     Vacation vacation = new(allinclusive, Destination, Country, Travellers);
@@ -145,6 +147,7 @@ namespace TravelPal
 
         private void cbxTravelType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // if Travel type is Trip
             if (cbxTravelType.SelectedIndex == (int)TravelType.Trip)
             {
                 cbxTripType.Visibility = Visibility.Visible;
@@ -153,6 +156,7 @@ namespace TravelPal
                 CbAllInClusive.Visibility = Visibility.Hidden;
 
             }
+            // if Travel type is Vacation
             else if (cbxTravelType.SelectedIndex == (int)TravelType.vacation)
             {
                 CbAllInClusive.Visibility = Visibility.Visible;
@@ -165,6 +169,7 @@ namespace TravelPal
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
+            //exit button, send data
             TravelsWindow travelsWindow = new(UserManager, TravelManager,currentUser);
             travelsWindow.Show();
             Close();

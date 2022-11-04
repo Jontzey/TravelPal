@@ -34,7 +34,7 @@ namespace TravelPal
         UserManager userManager = new();
         private List<IUser> users;
         private IUser SignedInUser;
-        
+
 
         
         // MainWindow constructor
@@ -45,6 +45,7 @@ namespace TravelPal
             // connects user list to usermanager method to get all list thats added in usermanager
             users = userManager.GetAllUsers();
             // foreach user and admin that exists in usermanager
+            
             foreach (IUser user in this.userManager.GetAllUsers())
             {
                 // if the user in the list is a User or Admin
@@ -83,7 +84,7 @@ namespace TravelPal
         public MainWindow(UserManager usermanager, TravelManager travelManager, IUser SignedInUser)
         {
             InitializeComponent();
-
+            
             // Saying that the Data we recovered is the same as the field variables we created
             // or you can say we send/update the data in field variables that handles our data //
             this.TravelManager = travelManager;

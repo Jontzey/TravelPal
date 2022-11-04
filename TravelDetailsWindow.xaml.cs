@@ -22,6 +22,9 @@ namespace TravelPal
     /// </summary>
     public partial class TravelDetailsWindow : Window
     {
+
+        
+        // Field varaibles \\
         List<Travel> travels;
         UserManager userManager;
         TravelManager TravelManager;
@@ -31,6 +34,8 @@ namespace TravelPal
         public TravelDetailsWindow(UserManager userManager, TravelManager Travelmanager, User user, Countries location, Travel selelcted)
         {
             InitializeComponent();
+
+            // connects field variables with data
             this.userManager = userManager;
             this.TravelManager = Travelmanager;
             this.user = user;
@@ -38,14 +43,14 @@ namespace TravelPal
             this.TheTravel = selelcted;
 
 
+            // set boxes text to current selected item in listview
 
-            tbxDestination.Text = selelcted.Destination;
-            TbxCountry.Text = selelcted.Country.ToString();
-            tbxTravelers.Text = selelcted.travelers.ToString();
-            
+
+            tbxINFO.Text = selelcted.GetInfo();
 
         }
 
+        // Button for exit
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             TravelsWindow travelsWindow = new(userManager,TravelManager,user);
@@ -53,11 +58,13 @@ namespace TravelPal
             Close();
         }
 
+        // button for change travel detais not implemented
         private void btnChangeTravel_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Sorry feature, is not implemented yet! for more information press info");
         }
 
+        // Info button
         private void btnInfo_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show($"Welcome to Info! " +

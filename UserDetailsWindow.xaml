@@ -126,14 +126,17 @@
                                                 VerticalAlignment="Center" 
                                                 HorizontalAlignment="Center" 
                                                 Foreground="White"/>
-
                 </StackPanel>
                 <Border
                 Width="250"
                 Height="2"
                 Background="White"
                 Opacity="0.5"/>
-                <StackPanel Orientation="Vertical" Margin="0,30,0,0">
+                    <ComboBox
+                        x:Name="cbxCountry"
+                        Margin="0,15,0,0"
+                        Width="170"/>
+                <StackPanel Orientation="Vertical"  Margin="0,18,0,0">
                     <Button x:Name="btnChangeDetails" Width="100" Height="40" Content="Update Details" Margin="60,00,60,12" Click="btnChangeDetails_Click"/>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock

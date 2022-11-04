@@ -55,9 +55,7 @@ public class UserManager
     }
 
    
-    //Summary//
-    //Add user with its properties//
-    // this method not used!!! //
+   
    
 
     // summary //
@@ -75,36 +73,17 @@ public class UserManager
 
     }
 
-    //public void hmm()
-    //{
+   
 
-    //    foreach (IUser user in users)
-    //    {
-    //        if (user is User)
-    //        {
-    //            users.Add(user as User);
-    //        }
-    //    }
-    //    foreach (User user in users)
-    //    {
-            
-    //    }
-    //}
-
-
-    // method not used yet
-    public bool UpdateUsername (IUser user,string Update)
-    {
-        return true;
-    }
 
     //summary//
     // Checks if the same username exists in Username
     public bool ValidateUsername (string username)
     {
-
+        // foreach user in the list
         foreach (IUser user in users)
         {
+
             if (user.Username == username)
             {
                 return false;
@@ -117,7 +96,7 @@ public class UserManager
     // Adds a new User //
     public bool AddUser(string username, string password, Countries Location, TravelManager travelManager)
     {
-       if(ValidateUsername(username))
+       if(ValidateUsername(username)) // Method to Validate
         {
             this.TravelManager = travelManager;
 
@@ -148,11 +127,12 @@ public class UserManager
     // a method to confirm password //
     public bool IsPasswordTheSame(string confirmPassword, string password)
     {
+         //if the two variables matches
         if (password == confirmPassword)
         {
             return true;
         }
-        else
+        else  // Show message does not match
         {
             MessageBox.Show("password does not match");
             return false;
@@ -163,23 +143,23 @@ public class UserManager
     // Changes users info //
     public void UserDetailUpdate(string username, string password, Countries location, IUser currentUser)
     {
-        //foreach (IUser user in users)
-        //{
-        //}
-            
+        
+            // if the signed in user is a user
+            // properties in signed in user is available
             User user = SignedInUser as User;
-
+            // set the user who is logged in, and update props with data we gathered
             SignedInUser.Username = username;
             SignedInUser.Password = password;
             SignedInUser.Location = location;
 
-        //    user.Username = username;
-        //    user.Password = password;
-        //    user.Location = location;
+        
     }
   
 
-    // method not in use //
+
+    /////////////////            NOTE!                    \\\\\\\\\\\\\\\\\\\\\\\
+     //Method to check if user exists in IUser list
+    ///////////////////// Method not in use\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     public bool SignInUser(string username, string password)
     {
         foreach(IUser user in users)

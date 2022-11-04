@@ -48,32 +48,18 @@
             Grid.Row="2"
             Grid.RowSpan="3"
             Grid.Column="1"
-            Grid.ColumnSpan="2"
-            Margin="0,10,0,0">
+            Grid.ColumnSpan="3"
+            HorizontalAlignment="Left"
+            Margin="70,0">
             <TextBlock
-                x:Name="tbxDestination"
+                x:Name="tbxINFO"
                 FontSize="20"
                 HorizontalAlignment="Center"
-                Text="Here goes travel destination"/>
-            <TextBlock
-                x:Name="TbxCountry"
-                HorizontalAlignment="Center"
-                Text="selected country"
-                FontSize="20"
-                Margin="0,5,0,0"/>
-            <TextBlock
-                x:Name="tbxTravelers"
-                FontSize="20"
-                HorizontalAlignment="Center"
-                Text="How many travellers"
-                Margin="0,5,0,0"/>
-            <TextBlock
-                x:Name="TODO"
-                FontSize="20"
-                HorizontalAlignment="Center"
-                Text=""
-                Margin="0,5,0,0"/>
+                Text="Here goes travel info"/>
+            
         </StackPanel>
+       
+        
 
         <Button
             x:Name="btnExit"

@@ -24,11 +24,13 @@ namespace TravelPal
     /// </summary>
     public partial class UserDetailsWindow : Window
     {
+
+        // field variables
         UserManager UserManager;
         TravelManager TravelManager;
         IUser currentUser;
         
-        Countries location;
+       
         public UserDetailsWindow(UserManager userManager, Countries location,TravelManager travelManager ,IUser theUser)
         {
             InitializeComponent();
@@ -38,7 +40,7 @@ namespace TravelPal
             // by making field variables we can use them everywhere in this cs.file //
 
             this.UserManager = userManager;
-            this.location = location;
+            
             this.TravelManager = travelManager;
             this.currentUser = theUser;
             //summary //
@@ -48,9 +50,18 @@ namespace TravelPal
             User theuser = userManager.SignedInUser as User;
             txbShowusername.Text = userManager.SignedInUser.Username;
 
-            
-            
-           
+
+
+            // puts enum class in combo box
+           var countries = Enum.GetValues(typeof(Countries));
+
+
+            foreach (var country in countries)
+            {
+                cbxCountry.Items.Add(country);
+            }
+
+
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -103,11 +114,12 @@ namespace TravelPal
                 // Inputs are the same as the textbox
                 string username = txbUsername.Text;
                 string password = txbPassword.Text;
+                Countries countries = (Countries)cbxCountry.SelectedIndex; 
                 // little box to show what user updated
                 MessageBox.Show($"Updated: Username: {username}  password: {password}");
 
                 // send data to usermanage to update all data
-                UserManager.UserDetailUpdate(username,password,location,currentUser);
+                UserManager.UserDetailUpdate(username,password,countries,currentUser);
 
                 //Open new window with the new data
                 TravelsWindow travelsWindow = new(UserManager, TravelManager,currentUser);

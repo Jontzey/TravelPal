@@ -174,6 +174,7 @@ namespace TravelPal
             // show all countries in Eu //
             if(cbxIsItEu.SelectedIndex == (int)EUorNotEU.EU)
             {
+                cbxCountry.Items.Clear();
                 //When something exists in the combo box, make combo box enabled //
                 cbxCountry.IsEnabled = true;
                 //Saves items from enum class in a variable // 
@@ -189,6 +190,7 @@ namespace TravelPal
             // show all countries //
             else if (cbxIsItEu.SelectedIndex == (int)EUorNotEU.Other)
             {
+                cbxCountry.Items.Clear();
                 //When something exists in the combo box, make combo box enabled //
                 cbxCountry.IsEnabled = true;
                 //Saves items from enum class in a variable // 

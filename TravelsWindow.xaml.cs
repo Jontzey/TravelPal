@@ -88,7 +88,7 @@ namespace TravelPal
                     selectitem.Tag = travel;
                     
                     // the content for each item we have as a User send this when added
-                    selectitem.Content = travel.GetInfo();
+                    selectitem.Content = travel.Country;
                     
                     
 
@@ -111,16 +111,16 @@ namespace TravelPal
                         btnDetails.Visibility = Visibility.Hidden;
                         btnUser.Visibility = Visibility.Hidden;
                         btnUser.Visibility = Visibility.Hidden;
-
+                        
+                            // Gets list to add to field variable list
                         travels = travelManager.GetList();
                 
-
+                            //loops trough list
                         foreach (Travel travel in travels)
                         {
 
-                    //ListViewItem SelectedItem = new();
-                    //SelectedItem.Content = travel;
-                    //SelectedItem.Tag = travel;
+                            // give item tags
+                            // add to Listview
                             ListViewItem listViewItem = new();
                             listViewItem.Tag = travel;
                              listViewItem.Content = travel.GetInfo();
@@ -173,13 +173,14 @@ namespace TravelPal
 
         private void btnDetails_Click(object sender, RoutedEventArgs e)
         {
-
+            // if noting is selected in the listview //
+            // Do this
             if (LvAddedTravels.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Nothing is Selected, is there a added travel?", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-
+            //else if something is selected
             ListViewItem selectedItem = LvAddedTravels.SelectedItem as ListViewItem;
             Travel TravelSelected = selectedItem.Tag as Travel;
 
@@ -194,16 +195,13 @@ namespace TravelPal
         private void btnAddTravel_Click(object sender, RoutedEventArgs e)
         {
             
-
+            // opens add travel window
+            // send data with it
             AddTravelWindow addTravelWindow = new(userManager,location,currentUser,travelManager);
             addTravelWindow.Show();
             Close();
         }
 
-        private void LvAddedTravels_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-           
-        }
 
         private void btnRemoveTravel_Click(object sender, RoutedEventArgs e)
         {
@@ -213,13 +211,13 @@ namespace TravelPal
 
             
 
-
+            // If nothing is selected send out message
             if (LvAddedTravels.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Please select a item to Remove", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-
+            //else selected item
 
             
             ListViewItem selectedItem = LvAddedTravels.SelectedItem as ListViewItem;
@@ -253,7 +251,7 @@ namespace TravelPal
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Welcome to TravelPal!\r This company");
+            MessageBox.Show("Welcome to TravelPal!\r\r\r\r Proud to be Created 2022\r This app is created for you as User to keep track of your travels\r\r\rHAPPY TRAVELS!\r\r\r\r\r\r Appversion: 0.0.1");
 
         }
     }

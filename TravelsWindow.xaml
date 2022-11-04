@@ -107,7 +107,7 @@
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            Grid.RowSpan="4" SelectionChanged="LvAddedTravels_SelectionChanged"/>
+            Grid.RowSpan="4" />
 
         <Button
             Content="INFO"
