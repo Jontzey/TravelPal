@@ -57,9 +57,9 @@ public class UserManager
         travelManager.AddTravel(vacation);
         travelManager.AddTravel(vacation1);
         travelManager.AddTravel(vacation2);
-        user.travels.Add(vacation3);
-        user.travels.Add(vacation4);
-        user.travels.Add(vacation5);
+        user1.travels.Add(vacation3);
+        user1.travels.Add(vacation4);
+        user1.travels.Add(vacation5);
         travelManager.AddTravel(vacation3);
         travelManager.AddTravel(vacation4);
         travelManager.AddTravel(vacation5);

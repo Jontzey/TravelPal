@@ -27,7 +27,7 @@ namespace TravelPal
         UserManager UserManager;
         TravelManager TravelManager;
         IUser currentUser;
-        string username,password;
+        
         Countries location;
         public UserDetailsWindow(UserManager userManager, Countries location,TravelManager travelManager ,IUser theUser)
         {

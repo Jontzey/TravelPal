@@ -70,20 +70,21 @@ namespace TravelPal
                     btnAddTravel.Visibility = Visibility.Visible;
                     btnDetails.Visibility = Visibility.Visible;
                     btnUser.Visibility = Visibility.Visible;
+                travels = travelManager.GetList();
                 foreach (Travel travel in theuser.travels)
                 {
                     
                     
                     ListViewItem selectitem = new ListViewItem();
-                    selectitem.Content = travel.GetCountryInfoName();
+                    //selectitem.Content = travel.GetCountryInfoName();
                     selectitem.Tag = travel;
-                    
+                    selectitem.Content = travel.GetInfo();
                     
                     
 
-                    LvAddedTravels.Items.Add($"{theuser.Username} {""} {selectitem}");
                     
                     
+                    LvAddedTravels.Items.Add(selectitem);
                     LvAddedTravels.SelectedItem = btnDetails;
                     
 
@@ -91,7 +92,7 @@ namespace TravelPal
                 }
 
             }
-            if (userAdmin is UserAdmin)
+           else if (userAdmin is UserAdmin)
             {
                         btnAddTravel.Visibility = Visibility.Hidden;
                         btnDetails.Visibility = Visibility.Hidden;
@@ -103,11 +104,12 @@ namespace TravelPal
 
                         foreach (Travel travel in travels)
                         {
-                            
-                            ListViewItem item = new();
-                            item.Content = travel
-                            item.Tag = travel;
-                            
+
+                    //ListViewItem SelectedItem = new();
+                    //SelectedItem.Content = travel;
+                    //SelectedItem.Tag = travel;
+                            ListViewItem listViewItem = new();
+                            listViewItem.Tag = travel;
                              LvAddedTravels.Items.Add(travel.GetInfo());
                         }
                
@@ -203,21 +205,21 @@ namespace TravelPal
                 MessageBox.Show("Please select a item to Remove", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-                ListViewItem selectedItem = LvAddedTravels.SelectedItem as ListViewItem;
 
-                
-                Travel TravelSelected = selectedItem.Tag as Travel;
-                 
 
-                user.travels.Remove(selectedItem.Tag as Travel);
             
-
-                 travelManager.RemoveTravel(selectedItem.Tag as Travel);
-
-
-           
-
+            ListViewItem selectedItem = LvAddedTravels.SelectedItem as ListViewItem;
+            travelManager.RemoveTravel(selectedItem.Tag as Travel);
+            user.travels.Remove(selectedItem.Tag as Travel);
             LvAddedTravels.Items.RemoveAt(LvAddedTravels.SelectedIndex);
+
+
+
+
+
+
+
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
