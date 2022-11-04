@@ -24,7 +24,7 @@ namespace TravelPal
     /// </summary>
     public partial class TravelsWindow : Window
     {
-        // Field variable //
+        // Field variables //
         UserManager userManager;
 
         List<IUser> users;
@@ -56,35 +56,47 @@ namespace TravelPal
             
             this.travelManager = travelManager;
             this.currentUser = TheCurrentUser;
+            this.userManager = userManager;
             
+            // if the current user is signed in as Admin or User
             User theuser = userManager.SignedInUser as User;
             UserAdmin userAdmin = userManager.SignedInUser as UserAdmin;
-            this.userManager = userManager;
 
             
             
-
+            // if signedInUser is a User
             if (theuser is User)
             {
+                // IF its a User make all button functions work and visiable
                     btnAddTravel.Visibility = Visibility.Visible;
                     btnAddTravel.Visibility = Visibility.Visible;
                     btnDetails.Visibility = Visibility.Visible;
                     btnUser.Visibility = Visibility.Visible;
+
+                // Get Data and send to travel list in Travelmanager //
+                // Update the list here in TravelWindow as to the list in travelmanager
                 travels = travelManager.GetList();
+
+                // foreach travel class that exists in the User
                 foreach (Travel travel in theuser.travels)
                 {
                     
-                    
+                    // function to give the item we gonna put in Listview
                     ListViewItem selectitem = new ListViewItem();
-                    //selectitem.Content = travel.GetCountryInfoName();
+                    
+                    // Give tag as its keeps track off whats been chosen in Listview
                     selectitem.Tag = travel;
+                    
+                    // the content for each item we have as a User send this when added
                     selectitem.Content = travel.GetInfo();
                     
                     
 
                     
-                    
+                    // Add to Listview list
                     LvAddedTravels.Items.Add(selectitem);
+
+                    // send the item to btnDetails for further use in a another window
                     LvAddedTravels.SelectedItem = btnDetails;
                     
 
@@ -94,6 +106,7 @@ namespace TravelPal
             }
            else if (userAdmin is UserAdmin)
             {
+                // IF its a User make all button hidden that is not needed for Adnin
                         btnAddTravel.Visibility = Visibility.Hidden;
                         btnDetails.Visibility = Visibility.Hidden;
                         btnUser.Visibility = Visibility.Hidden;
@@ -110,7 +123,8 @@ namespace TravelPal
                     //SelectedItem.Tag = travel;
                             ListViewItem listViewItem = new();
                             listViewItem.Tag = travel;
-                             LvAddedTravels.Items.Add(travel.GetInfo());
+                             listViewItem.Content = travel.GetInfo();
+                             LvAddedTravels.Items.Add(listViewItem);
                         }
                
                 
@@ -135,7 +149,7 @@ namespace TravelPal
             // a Messagebox with yes or no option will pop up //
             if (MessageBox.Show("Are you sure you wanna sign out?", "Sign Out", MessageBoxButton.YesNo, MessageBoxImage.Asterisk) == MessageBoxResult.No)
             {
-                //if no //
+                //if no // = the button no is pressed
             }
             else
             {
@@ -144,7 +158,7 @@ namespace TravelPal
                 
                  Close();
 
-                //if yes //
+                //if yes // = the button yes is pressed
             }
         }
 
@@ -196,8 +210,8 @@ namespace TravelPal
             User user = userManager.SignedInUser as User;
             UserAdmin userAdmin = userManager.SignedInUser as UserAdmin;
 
-           
 
+            
 
 
             if (LvAddedTravels.SelectedItems.Count == 0)
@@ -209,17 +223,32 @@ namespace TravelPal
 
             
             ListViewItem selectedItem = LvAddedTravels.SelectedItem as ListViewItem;
-            travelManager.RemoveTravel(selectedItem.Tag as Travel);
-            user.travels.Remove(selectedItem.Tag as Travel);
-            LvAddedTravels.Items.RemoveAt(LvAddedTravels.SelectedIndex);
-
-
-
-
-
-
-
+            Travel selectedTravel = selectedItem.Tag as Travel;
+            travelManager.RemoveTravel(selectedTravel);
             
+           
+
+
+            users = userManager.GetAllUsers();
+            foreach (IUser dauser in users)
+            {
+                if (dauser is User)
+                {
+                    User u = dauser as User;
+
+                    if (u.travels.Contains(selectedTravel))
+                    {
+                        u.travels.Remove(selectedTravel);
+                        LvAddedTravels.Items.RemoveAt(LvAddedTravels.SelectedIndex);
+                    }
+                }
+            }
+
+
+
+
+
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -17,9 +17,9 @@ public class UserManager
     TravelManager TravelManager;
     public IUser SignedInUser { get; set; }
 
-    public UserManager(TravelManager travelManager)
+    public UserManager()
     {
-        this.TravelManager = travelManager;
+        
         //this.travels = travelManager.GetList();
         // Created a Admin 
         UserAdmin Admin = new UserAdmin()
@@ -35,38 +35,21 @@ public class UserManager
             Location = Countries.Argentina,
             
         };
-        User user1 = new User()
-        {
-            Username = "Darth Vader",
-            Password = "Password",
-            Location = Countries.Argentina,
-
-        };
-
-
+      
         Vacation vacation = new(true, "justin Bieber Concert", Countries.Afghanistan, 2);
         Vacation vacation1 = new(true, "Im going to Mecka to pray", Countries.Belgium, 1);
         Vacation vacation2 = new(true, "Im going to find wife", Countries.Saint_Helena, 5);
 
-        Vacation vacation3 = new(true, "Death Star", Countries.Denmark, 2);
-        Vacation vacation4 = new(true, "To See my Daughter Leia!", Countries.Cape_Verde, 1);
-        Vacation vacation5 = new(true, "Find the Rebels! urgh!!", Countries.Antarctica, 5);
+        
         user.travels.Add(vacation);
         user.travels.Add(vacation1);
         user.travels.Add(vacation2);
-        travelManager.AddTravel(vacation);
-        travelManager.AddTravel(vacation1);
-        travelManager.AddTravel(vacation2);
-        user1.travels.Add(vacation3);
-        user1.travels.Add(vacation4);
-        user1.travels.Add(vacation5);
-        travelManager.AddTravel(vacation3);
-        travelManager.AddTravel(vacation4);
-        travelManager.AddTravel(vacation5);
-
-
-        users.Add(user);
         users.Add(Admin);
+        users.Add(user);
+        
+
+
+        
         
         
     }

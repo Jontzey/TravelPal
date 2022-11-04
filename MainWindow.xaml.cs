@@ -29,9 +29,10 @@ namespace TravelPal
     {
 
         // field variables
+        // Creates new usermanager and new travelmanager everytime program starts
         TravelManager TravelManager = new();
-        UserManager userManager;
-        private List<IUser> users = new();
+        UserManager userManager = new();
+        private List<IUser> users;
         private IUser SignedInUser;
         
 
@@ -39,31 +40,60 @@ namespace TravelPal
         // MainWindow constructor
         public MainWindow()
         {
-
+            this.userManager = new UserManager();
             InitializeComponent();
-            userManager = new(TravelManager);
-            
+            // connects user list to usermanager method to get all list thats added in usermanager
+            users = userManager.GetAllUsers();
+            // foreach user and admin that exists in usermanager
+            foreach (IUser user in this.userManager.GetAllUsers())
+            {
+                // if the user in the list is a User or Admin
+                // in this case a User
+                if (user is User)
+                {
+                    // Calls User class and variable to get the properties of User class
+                    User u = user as User;
+
+                    // foreach Travel that exists in Users property Travel
+                    foreach (Travel userTravel in u.travels)
+                    {
+                        // if in the class User prop Travel is a Trip or Vacation
+                        if (userTravel is Trip)
+                        {
+                            //Calls the Travel and what kind of travel
+                            Trip t = userTravel as Trip;
+                            // add to travel list
+                            this.TravelManager.AddTravel(t);
+                        }
+                        else if (userTravel is Vacation)
+                        {
+                            //Calls the Travel and what kind of travel
+                            Vacation v = userTravel as Vacation;
+                            // add to travel list
+                            this.TravelManager.AddTravel(v);
+                        }
+                    }
+                }
+            }
         }
 
         // Made another constructor for when opening a new Mainwindow//
-        // because could not get information from the other windows //
+       // this is to send back the information we got from Register window //
 
         public MainWindow(UserManager usermanager, TravelManager travelManager, IUser SignedInUser)
         {
             InitializeComponent();
 
             // Saying that the Data we recovered is the same as the field variables we created
+            // or you can say we send/update the data in field variables that handles our data //
             this.TravelManager = travelManager;
-            
             this.userManager = usermanager;
             this.SignedInUser = SignedInUser;
 
-           
 
-            // Note! to myself //
-            // is this required? //
-            // when opening a new window it gets the users? //
-            userManager.GetAllUsers();
+            
+         
+          
 
             
             
@@ -89,8 +119,8 @@ namespace TravelPal
             
             RegisterWindow registerWindow = new(userManager,TravelManager);
             // when register button is pressed, open register window
-            // When that happens close Mainwindow
             registerWindow.Show();
+            // When that happens close Mainwindow
            Close();
 
             
